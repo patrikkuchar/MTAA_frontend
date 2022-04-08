@@ -59,7 +59,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:ems="10"
+                        android:hint="Prihlasovacie heslo"
                         android:inputType="textPassword"
+                        android:minHeight="48dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/emailInput"
@@ -71,7 +73,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:ems="10"
+                        android:hint="Prihlasovací email"
                         android:inputType="textEmailAddress"
+                        android:minHeight="48dp"
                         android:password="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +93,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 
+
                     <Button
-                        android:id="@+id/registerButton"
+                        android:id="@+id/registerbutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp"
@@ -107,7 +112,7 @@
                         android:layout_marginBottom="5dp"
                         android:text="New to our app?"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+                        app:layout_constraintBottom_toTopOf="@+id/registerbutton"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

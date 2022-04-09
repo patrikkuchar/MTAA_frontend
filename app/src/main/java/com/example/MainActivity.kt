@@ -1,43 +1,42 @@
 package com.example
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import com.demo.retrofithttpmethods.MainActivityViewModel
 import com.example.data.LoginRequestData
 import com.example.databinding.ActivityMainBinding
+import com.example.data.LoginResponseData
+import androidx.lifecycle.Observer
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    lateinit var viewModel:MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_main)
+        initViewModel()
+
+
         /*
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)*/
+        setContentView(binding.root)
 
+
+         */
         val registerBtn = findViewById<Button>(R.id.registerbutton)
         val loginBtn = findViewById<Button>(R.id.loginButton)
         val emailInput = findViewById<EditText>(R.id.emailInput)
         val passwordInput = findViewById<EditText>(R.id.passwordInput)
 
-
-        registerBtn.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
 
         loginBtn.setOnClickListener {
             val email = emailInput.text.toString()
@@ -48,20 +47,38 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val apiService = RestApiService()
-            val userInfo = LoginRequestData(email = email, password = password)
+            var user = LoginRequestData(email,password)
 
-            apiService.loginUser(userInfo) {
-                if (it?.id != null) {
-                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, RegisterActivity::class.java))
-                } else {
-                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
-                }
-            }
+
+            createUser()
+
+
         }
 
         //rýchle vyskakovacie okno
         //Toast.makeText(this, "Hello world!", Toast.LENGTH_SHORT).show()
+
+
+
+    }
+
+    private fun createUser() {
+        val emailInput = findViewById<EditText>(R.id.emailInput)
+        val passwordInput = findViewById<EditText>(R.id.passwordInput)
+        val user  = LoginRequestData( emailInput.text.toString(), passwordInput.text.toString())
+        viewModel.login_user(user)
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        viewModel.login_user_response.observe(this, Observer <LoginResponseData?>{
+
+            if(it  == null) {
+                Toast.makeText(this@MainActivity, "Failed to create User", Toast.LENGTH_LONG).show()
+            } else {
+                //{"code":201,"meta":null,"data":{"id":2877,"name":"xxxxxaaaaabbbbb","email":"xxxxxaaaaabbbbb@gmail.com","gender":"male","status":"active"}}
+                Toast.makeText(this@MainActivity, "Successfully Logged User", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }

@@ -49,11 +49,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        val emailInput = findViewById<EditText>(R.id.register_emailInput).text.toString()
-        val nameInput = findViewById<EditText>(R.id.register_nameInput).text.toString()
-        val surnameInput = findViewById<EditText>(R.id.register_surnameInput).text.toString()
-        val passwordInput = findViewById<EditText>(R.id.register_passwordInput).text.toString()
-        val confpasswordInput = findViewById<EditText>(R.id.register_comfPasswordInput).text.toString()
+        val emailInput = findViewById<EditText>(R.id.register_emailInput).text.toString().trim()
+        val nameInput = findViewById<EditText>(R.id.register_nameInput).text.toString().trim()
+        val surnameInput = findViewById<EditText>(R.id.register_surnameInput).text.toString().trim()
+        val passwordInput = findViewById<EditText>(R.id.register_passwordInput).text.toString().trim()
+        val confpasswordInput = findViewById<EditText>(R.id.register_comfPasswordInput).text.toString().trim()
         val user  = RegisterRequestData(emailInput,nameInput,surnameInput,passwordInput,confpasswordInput)
 
 

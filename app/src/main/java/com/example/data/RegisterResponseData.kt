@@ -1,4 +1,5 @@
 package com.example.data
 
-class RegisterResponseData {
-}
+data class RegisterResponseData (
+    val code: Int?,
+)

@@ -30,7 +30,7 @@ class MainSearchActivity : AppCompatActivity() {
         }
 
         filterButton.setOnClickListener {
-            filterDiv.visibility = LinearLayout.VISIBLE
+            filterDiv.visibility = LinearLayout.GONE
         }
     }
 }

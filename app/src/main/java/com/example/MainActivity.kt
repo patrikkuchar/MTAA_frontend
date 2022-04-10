@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createUser() {
-        val emailInput = findViewById<EditText>(R.id.emailInput)
-        val passwordInput = findViewById<EditText>(R.id.passwordInput)
+        val emailInput = findViewById<EditText>(R.id.register_emailInput)
+        val passwordInput = findViewById<EditText>(R.id.register_passwordInput)
         val user  = LoginRequestData( emailInput.text.toString(), passwordInput.text.toString())
         viewModel.login_user(user)
     }
@@ -63,12 +63,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.login_user_response.observe(this, Observer <LoginResponseData?>{
 
             if(it  == null) {
-                println("SDA")
-                Toast.makeText(this@MainActivity, "Failed to create User", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@MainActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
-                println("SD56A")
-                //{"code":201,"meta":null,"data":{"id":2877,"name":"xxxxxaaaaabbbbb","email":"xxxxxaaaaabbbbb@gmail.com","gender":"male","status":"active"}}
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainSearchActivity::class.java))
 
             }
         })

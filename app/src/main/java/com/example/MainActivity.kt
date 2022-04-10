@@ -13,6 +13,7 @@ import com.example.data.LoginRequestData
 import com.example.databinding.ActivityMainBinding
 import com.example.data.LoginResponseData
 import androidx.lifecycle.Observer
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,18 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.content_main)
         initViewModel()
 
-
-        /*
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-         */
         val registerBtn = findViewById<Button>(R.id.registerbutton)
         val loginBtn = findViewById<Button>(R.id.register_loginButton)
         val emailInput = findViewById<EditText>(R.id.register_emailInput)
         val passwordInput = findViewById<EditText>(R.id.register_passwordInput)
-
 
         loginBtn.setOnClickListener {
             val email = emailInput.text.toString()
@@ -47,18 +40,12 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            var user = LoginRequestData(email,password)
-
-
             createUser()
-
-
         }
 
-        //rýchle vyskakovacie okno
-        //Toast.makeText(this, "Hello world!", Toast.LENGTH_SHORT).show()
-
-
+        registerBtn.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
 
     }
 
@@ -70,14 +57,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
+        println("SS")
         viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.login_user_response.observe(this, Observer <LoginResponseData?>{
 
             if(it  == null) {
+                println("SDA")
                 Toast.makeText(this@MainActivity, "Failed to create User", Toast.LENGTH_LONG).show()
             } else {
+                println("SD56A")
                 //{"code":201,"meta":null,"data":{"id":2877,"name":"xxxxxaaaaabbbbb","email":"xxxxxaaaaabbbbb@gmail.com","gender":"male","status":"active"}}
-                Toast.makeText(this@MainActivity, "Successfully Logged User", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+
             }
         })
     }

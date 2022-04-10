@@ -27,6 +27,7 @@ class MainActivityViewModel: ViewModel() {
         val call = retroInstance.loginUser(user)
         call.enqueue(object: Callback<LoginResponseData> {
             override fun onFailure(call: Call<LoginResponseData>, t: Throwable) {
+                println("SDADADSA")
                 login_user_response.postValue(null)
                 println("SSSSSS")
             }
@@ -34,7 +35,7 @@ class MainActivityViewModel: ViewModel() {
             override fun onResponse(call: Call<LoginResponseData>, response: Response<LoginResponseData>) {
                 if(response.isSuccessful) {
                     login_user_response.postValue(response.body())
-                    println("SSS")
+
 
                 } else {
                     login_user_response.postValue(null)

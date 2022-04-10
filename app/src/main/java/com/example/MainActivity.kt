@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
 
          */
         val registerBtn = findViewById<Button>(R.id.registerbutton)
-        val loginBtn = findViewById<Button>(R.id.loginButton)
-        val emailInput = findViewById<EditText>(R.id.emailInput)
-        val passwordInput = findViewById<EditText>(R.id.passwordInput)
+        val loginBtn = findViewById<Button>(R.id.register_loginButton)
+        val emailInput = findViewById<EditText>(R.id.register_emailInput)
+        val passwordInput = findViewById<EditText>(R.id.register_passwordInput)
 
 
         loginBtn.setOnClickListener {

@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.databinding.ActivityMainBinding
+import com.example.storage.SharedPrefManager
 
 class MainSearchActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -21,6 +22,7 @@ class MainSearchActivity : AppCompatActivity() {
         val filterCloseButton = findViewById<Button>(R.id.filterCloseButton)
         var filterDiv = findViewById<LinearLayout>(R.id.filterDiv)
 
+
         sellPropertyButton.setOnClickListener {
             startActivity(Intent(this, SellPropertyActivity::class.java))
         }
@@ -32,5 +34,9 @@ class MainSearchActivity : AppCompatActivity() {
         filterButton.setOnClickListener {
             filterDiv.visibility = LinearLayout.GONE
         }
+
+        val test = SharedPrefManager.getInstance(this).user
+        println(test)
+
     }
 }

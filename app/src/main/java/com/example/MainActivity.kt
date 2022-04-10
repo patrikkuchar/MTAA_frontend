@@ -13,6 +13,8 @@ import com.example.data.LoginRequestData
 import com.example.databinding.ActivityMainBinding
 import com.example.data.LoginResponseData
 import androidx.lifecycle.Observer
+import com.example.data.User
+import com.example.storage.SharedPrefManager
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
@@ -63,8 +65,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.login_user_response.observe(this, Observer <LoginResponseData?>{
 
             if(it  == null) {
+
+
                 Toast.makeText(this@MainActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
+                val user = User((it.id)!!.toInt(),it.email,it.name,it.surname,it.token)
+                SharedPrefManager.getInstance(applicationContext).saveUser(user)
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainSearchActivity::class.java))
 

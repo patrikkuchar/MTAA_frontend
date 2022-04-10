@@ -1,0 +1,36 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "rooms" : 3,
+      "area": 65,
+      "price": 150000,
+      "last_updated": "datum",
+      "address": "Low-Carb",
+      "owner" : "PAJO",
+      "image" : "image"
+    },
+
+    {
+      "id": 2,
+      "rooms" : 4,
+      "area": 70,
+      "price": 160000,
+      "last_updated": "datum",
+      "address": "Low-Carb",
+      "owner" : "PAJOkkkk",
+      "image" : "image"
+    },
+
+    {
+      "id": 3,
+      "rooms" : 5,
+      "area": 75,
+      "price": 160500,
+      "last_updated": "datum",
+      "address": "Low-Carb",
+      "owner" : "PAJOjj",
+      "image" : "image"
+    }
+  ]
+}

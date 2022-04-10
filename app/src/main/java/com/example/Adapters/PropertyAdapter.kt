@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.R
 import com.example.data.Property
@@ -26,6 +27,13 @@ class PropertyAdapter(private val context: Context, private val dataSource: Arra
         return position.toLong()
     }
 
+    fun dpToPx(dp: Int): Int {
+        val density = context.resources
+                .displayMetrics
+                .density
+        return Math.round(dp.toFloat() * density)
+    }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val rowView = inflater.inflate(R.layout.property_homepage, parent, false)
 
@@ -33,6 +41,11 @@ class PropertyAdapter(private val context: Context, private val dataSource: Arra
         val addressTextView = rowView.findViewById<TextView>(R.id.address)
         val areaTextView = rowView.findViewById<TextView>(R.id.area)
         val roomsTextView = rowView.findViewById<TextView>(R.id.rooms)
+
+   /*     val propertyDiv = rowView.findViewById<LinearLayout>(R.id.property_model)
+        val params: ViewGroup.LayoutParams = propertyDiv.layoutParams
+        params.height = dpToPx(120)
+        propertyDiv.layoutParams = params*/
 
         val property = getItem(position) as Property
 

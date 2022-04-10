@@ -40,7 +40,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/greetingtextHi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
@@ -118,7 +117,9 @@
                     android:id="@+id/regionSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
 
             </LinearLayout>
 
@@ -140,10 +141,11 @@
                     android:textStyle="bold" />
 
                 <Spinner
-                    android:id="@+id/regionSpinner2"
+                    android:id="@+id/subregionSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout
@@ -300,17 +302,27 @@
                 android:textAlignment="center" />
 
             <ListView
+                android:id="@+id/propertyListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/properties"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/property_list_view"/>
+                android:orientation="vertical"></LinearLayout>
+
+
             <LinearLayout
+                android:id="@+id/property_model"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/round_corners"
                 android:orientation="horizontal"
-                android:visibility="visible"
-                android:id="@+id/property">
+                android:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -476,8 +488,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -672,7 +682,7 @@
 
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+   <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/round_menu"
@@ -693,6 +703,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
+                android:clickable="true"
+                android:focusable="true"
                 app:srcCompat="@drawable/hearth_icon" />
 
             <ImageView
@@ -704,6 +716,8 @@
                 app:layout_constraintStart_toEndOf="@+id/imageButton"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
+                android:clickable="true"
+                android:focusable="true"
                 app:srcCompat="@drawable/house_icon" />
 
             <ImageView
@@ -715,10 +729,12 @@
                 app:layout_constraintStart_toEndOf="@+id/imageButton5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
+                android:clickable="true"
+                android:focusable="true"
                 app:srcCompat="@drawable/phone_icon" />
 
             <ImageView
-                android:id="@+id/imageButton7"
+                android:id="@+id/bottomNavProfile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="20dp"
@@ -726,6 +742,8 @@
                 app:layout_constraintStart_toEndOf="@+id/imageButton6"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
+                android:clickable="true"
+                android:focusable="true"
                 app:srcCompat="@drawable/avatar_icon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>

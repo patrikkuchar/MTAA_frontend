@@ -75,6 +75,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="numberDecimal"
+                        android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -110,6 +111,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="numberDecimal"
+                        android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -145,6 +147,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="numberDecimal"
+                        android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -237,7 +240,7 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/round_button"
-                android:text="Button" />
+                android:text="Add property" />
         </LinearLayout>
     </ScrollView>
 
@@ -288,7 +291,7 @@
                 app:srcCompat="@drawable/phone_icon" />
 
             <ImageView
-                android:id="@+id/imageButton7"
+                android:id="@+id/bottomNavProfile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="20dp"

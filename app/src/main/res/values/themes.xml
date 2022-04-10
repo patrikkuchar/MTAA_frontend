@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.PKCP" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#E09732</item>
+        <item name="colorPrimary">@color/third1</item>
         <item name="colorPrimaryVariant">#EFE6D7</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->

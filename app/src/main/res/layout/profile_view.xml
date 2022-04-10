@@ -157,6 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
+                android:elevation="10dp"
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -185,6 +186,14 @@
                 android:textColor="#222222"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <View
+                android:id="@+id/horizontalLine"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -358,7 +367,7 @@
                             android:textSize="12sp" />
 
                         <Button
-                            android:id="@+id/button9"
+                            android:id="@+id/deletePropertyButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="40dp"
@@ -375,49 +384,61 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/deletePropertyDiv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/favourite_div2"
+        android:background="@drawable/filter_div"
         android:orientation="vertical"
+        android:visibility="visible"
+        android:elevation="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.9">
 
-        <TextView
-            android:id="@+id/textView36"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Are you sure you want to delete this property?"
-            android:textAlignment="center"
-            android:textSize="26sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:orientation="horizontal">
+            android:layout_margin="4dp"
+            android:background="@drawable/favourite_div2"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button10"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_button"
-                android:text="yes" />
+                android:layout_margin="10dp"
+                android:text="Are you sure you want to delete this property?"
+                android:textAlignment="center"
+                android:textSize="26sp" />
 
-            <Button
-                android:id="@+id/button11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_button"
-                android:text="no" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/profileDecisionYesButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:text="yes" />
+
+                <Button
+                    android:id="@+id/profileDecisionNoButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:text="no" />
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -466,7 +487,7 @@
                 app:srcCompat="@drawable/phone_icon" />
 
             <ImageView
-                android:id="@+id/imageButton7"
+                android:id="@+id/bottomNavProfile"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="20dp"

@@ -11,4 +11,6 @@
     <color name="primary_bg">#EFE6D7</color>
     <color name="secondary1">#FF90AA9F</color>
     <color name="secondary2">#FF5A5E58</color>
+    <color name="third1">#E09732</color>
+    <color name="third2">#A06747</color>
 </resources>

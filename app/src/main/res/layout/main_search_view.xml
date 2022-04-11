@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id = "@+id/my_root">
@@ -22,7 +23,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@id/properties">
 
             <TextView
                 android:id="@+id/textView6"
@@ -305,14 +307,15 @@
                 android:id="@+id/propertyListView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
             </ListView>
-
             <LinearLayout
                 android:id="@+id/properties"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+            </LinearLayout>
 
 
             <LinearLayout
@@ -322,179 +325,18 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/round_corners"
                 android:orientation="horizontal"
-                android:visibility="visible">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.4"
-                        app:srcCompat="@drawable/avatar_icon" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHeight_percent="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/imageView7"
-                        app:layout_constraintWidth_percent="0.45">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/textView23"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="135 000"
-                                android:textAlignment="center"
-                                android:textSize="10sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView16"
-                                app:layout_constraintHorizontal_bias="0.0"
-                                app:layout_constraintStart_toStartOf="@+id/imageView15"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView15" />
-
-                            <TextView
-                                android:id="@+id/textView24"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Lorencova 5, Krompachy"
-                                android:textAlignment="center"
-                                android:textSize="10sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/imageView16"
-                                app:layout_constraintStart_toStartOf="@+id/imageView16"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
-
-                            <ImageView
-                                android:id="@+id/imageView16"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="5dp"
-                                android:padding="2dp"
-                                app:layout_constraintHeight_percent="0.4"
-                                app:layout_constraintStart_toEndOf="@+id/imageView15"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintWidth_percent="0.5"
-                                app:srcCompat="@drawable/address_icon" />
-
-                            <ImageView
-                                android:id="@+id/imageView15"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="5dp"
-                                android:padding="2dp"
-                                app:layout_constraintHeight_percent="0.4"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintWidth_percent="0.5"
-                                app:srcCompat="@drawable/euro_icon" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linearLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:orientation="horizontal"
-                        app:layout_constraintHeight_percent="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/imageView7"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintWidth_percent="0.45">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:id="@+id/imageView13"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="5dp"
-                                android:padding="2dp"
-                                app:layout_constraintHeight_percent="0.4"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintWidth_percent="0.5"
-                                app:srcCompat="@drawable/rooms_icon" />
-
-                            <ImageView
-                                android:id="@+id/imageView14"
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_marginTop="5dp"
-                                android:padding="2dp"
-                                app:layout_constraintHeight_percent="0.4"
-                                app:layout_constraintStart_toEndOf="@+id/imageView13"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintWidth_percent="0.5"
-                                app:srcCompat="@drawable/houseplan_icon" />
-
-                            <TextView
-                                android:id="@+id/textView20"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="3-rooms"
-                                android:textAlignment="center"
-                                android:textSize="10sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/imageView13"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView13" />
-
-                            <TextView
-                                android:id="@+id/textView21"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="80 m"
-                                android:textAlignment="center"
-                                android:textSize="10sp"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/imageView13"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/imageView17"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:padding="5dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/hearth_icon" />
-
-                    <TextView
-                        android:id="@+id/textView25"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:text="updated: 10.3.2021"
-                        android:textSize="7sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/imageView17" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                android:visibility="invisible">
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:orientation="horizontal"></LinearLayout>
+
+
+
 
         </LinearLayout>
+
+
+
+
     </ScrollView>
 
     <LinearLayout
@@ -517,7 +359,8 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:background="@drawable/favourite_div"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="MissingClass">
 
             <TextView
                 android:id="@+id/textView27"
@@ -540,10 +383,28 @@
             <SeekBar
                 android:id="@+id/seekBar2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:min="10000"
+                android:max="500000"/>
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_min"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:value="10000"
+                android:valueFrom="10000"
+                android:valueTo="200000" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_max"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:value="200000"
+                android:valueFrom="200000"
+                android:valueTo="1000000" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/priceRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="100 000 € - 500 000 €"
@@ -665,7 +526,7 @@
                     android:textSize="10sp" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/filterSubmit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"

@@ -25,12 +25,21 @@
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
         <activity android:name=".MainSearchActivity"
-            android:theme="@style/Theme.PKCP.NoActionBar">
+            android:theme="@style/Theme.PKCP.NoActionBar"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".SellPropertyActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
         <activity android:name=".ProfileActivity"
+            android:theme="@style/Theme.PKCP.NoActionBar">
+        </activity>
+        <activity android:name=".TestMainActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
     </application>

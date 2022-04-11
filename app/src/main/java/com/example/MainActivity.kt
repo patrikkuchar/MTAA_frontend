@@ -45,9 +45,16 @@ class MainActivity : AppCompatActivity() {
             createUser()
         }
 
+
+        
+         
+
         registerBtn.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this, TestMainActivity::class.java))
         }
+
+
+
 
 
     }

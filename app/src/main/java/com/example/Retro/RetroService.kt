@@ -1,14 +1,10 @@
 package com.example.Retro
 
-import com.example.data.LoginRequestData
-import com.example.data.LoginResponseData
-import com.example.data.RegisterRequestData
-import com.example.data.RegisterResponseData
+import com.example.data.*
+import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
+
 
 interface RetroService {
 
@@ -19,4 +15,32 @@ interface RetroService {
     @POST("user/register/")
     @Headers("Content-Type: application/json")
     fun registerUser(@Body params: RegisterRequestData): Call<RegisterResponseData>
+
+    @GET("filter/{region_id}+{subregion_id}+{price_min_max}+{area_min_max}+{rooms}/")
+    @Headers("Content-Type: application/json")
+    fun filter(
+        @Path("region_id") region_id: String,
+        @Path("subregion_id") subregion_id: String,
+        @Path("price_min_max") price_min_max: String,
+        @Path("area_min_max") area_min_max: String,
+        @Path("rooms") rooms: String,
+        @Header("Authorization") token: String)
+
+    : Call<Propety_list>
+
+
+    @GET("subregions/{region_id}/")
+    open fun get_subregions(
+        @Path("region_id") region_id: Int,
+        @Header("Authorization") token: String)
+    :Call<Subregion_list>
+
+
+
+    @GET("regions/")
+    @Headers("Content-Type: application/json")
+    fun get_regions(@Header("Authorization") token: String) : Call<Region_List>
+
+
+
 }

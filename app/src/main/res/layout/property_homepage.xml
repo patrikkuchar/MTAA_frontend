@@ -12,14 +12,16 @@
         android:layout_height="120dp"
         android:layout_margin="10dp"
         android:background="@drawable/round_corners"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/propertymodel"
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/prop_image"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +35,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHeight_percent="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/prop_image"
                 app:layout_constraintWidth_percent="0.45">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +99,7 @@
                 android:layout_height="0dp"
                 android:orientation="horizontal"
                 app:layout_constraintHeight_percent="0.5"
-                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/prop_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.45">
 

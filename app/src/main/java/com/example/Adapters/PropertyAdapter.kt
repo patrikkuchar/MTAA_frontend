@@ -1,16 +1,20 @@
 package com.example.Adapters
 
+import android.R.attr.data
+import android.app.Activity
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.example.R
-import com.example.data.Property
+import com.example.data.Prop
 
-class PropertyAdapter(private val context: Context, private val dataSource: ArrayList<Property>) : BaseAdapter() {
+
+class PropertyAdapter(private val context: Activity, private val dataSource: ArrayList<Prop>) :
+    BaseAdapter() {
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -34,21 +38,36 @@ class PropertyAdapter(private val context: Context, private val dataSource: Arra
         return Math.round(dp.toFloat() * density)
     }
 
+    fun clearData() {
+        // clear the data
+        this.dataSource.clear()
+    }
+
+
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val rowView = inflater.inflate(R.layout.property_homepage, parent, false)
+        this.notifyDataSetChanged()
 
         val priceTextView = rowView.findViewById<TextView>(R.id.price)
         val addressTextView = rowView.findViewById<TextView>(R.id.address)
         val areaTextView = rowView.findViewById<TextView>(R.id.area)
         val roomsTextView = rowView.findViewById<TextView>(R.id.rooms)
+        val image_property = rowView.findViewById<ImageView>(R.id.prop_image)
+
 
    /*     val propertyDiv = rowView.findViewById<LinearLayout>(R.id.property_model)
         val params: ViewGroup.LayoutParams = propertyDiv.layoutParams
         params.height = dpToPx(120)
         propertyDiv.layoutParams = params*/
 
-        val property = getItem(position) as Property
+        val property = getItem(position) as Prop
 
+
+        val imageBytes = Base64.decode(property.image, 0)
+        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+
+        image_property.setImageBitmap(image)
         priceTextView.text = property.price.toString()
         addressTextView.text = property.address
         areaTextView.text = property.area.toString()

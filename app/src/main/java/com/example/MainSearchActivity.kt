@@ -42,7 +42,9 @@ class MainSearchActivity : AppCompatActivity() {
         val filterCloseButton = findViewById<Button>(R.id.filterCloseButton)
         var profileButton = findViewById<ImageView>(R.id.bottomNavProfile)
         var filterDiv = findViewById<LinearLayout>(R.id.filterDiv)
-        var filtersubmit = findViewById<Button>(R.id.filterSubmit)
+        val filterSubmitButton = findViewById<Button>(R.id.filterpotvr)
+        var region = findViewById<Spinner>(R.id.regionSpinner)
+        var subregion = findViewById<Spinner>(R.id.subregionSpinner)
 
         val slider_min = findViewById<Slider>(R.id.slider_min)
         val slider_max = findViewById<Slider>(R.id.slider_max)
@@ -56,6 +58,14 @@ class MainSearchActivity : AppCompatActivity() {
 
         profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+        filterSubmitButton.setOnClickListener {
+            val min = slider_min.value.toInt().toString()
+            val max = slider_max.value.toInt().toString()
+            val region_id = region.selectedItemId
+            val subregion_id = subregion.selectedItemId
+            println("AHOOOOJ")
         }
 
         var min_price = 10000
@@ -100,15 +110,15 @@ class MainSearchActivity : AppCompatActivity() {
 
         filterCloseButton.setOnClickListener {
             filterDiv.visibility = LinearLayout.GONE
+            println("AHOOOJ")
+
         }
 
         filterButton.setOnClickListener {
             filterDiv.visibility = LinearLayout.VISIBLE
         }
 
-        filtersubmit.setOnClickListener {
 
-        }
     }
 
     private fun fetch_regions() {

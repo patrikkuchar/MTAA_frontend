@@ -20,6 +20,10 @@ class MainSearchActivityViewModel: ViewModel() {
         subregions = MutableLiveData()
     }
 
+    fun likedProperties() {
+
+    }
+
     fun filter(token:String , region_id:String , subregion_id:String , price_min_max:String,area_min_max:String,rooms:String){
         var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
 

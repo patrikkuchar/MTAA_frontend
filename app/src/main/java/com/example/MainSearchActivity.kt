@@ -285,6 +285,9 @@ class MainSearchActivity : AppCompatActivity() {
 
     }
 
+    fun add_favourite(){
+
+    }
 
     private fun fetch_properties(subregion: String,region: String) {
         var subregion_id = ""
@@ -311,7 +314,6 @@ class MainSearchActivity : AppCompatActivity() {
         val token = SharedPrefManager.getInstance(this).user.token.toString()
         viewModel.filter(token="Bearer "+token,region_id,subregion_id,price_min_max,area_min_max,rooms)
     }
-
 
     private fun initViewModel() {
 

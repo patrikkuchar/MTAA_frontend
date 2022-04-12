@@ -1,6 +1,5 @@
 package com.example.Adapters
 
-import android.R.attr.data
 import android.app.Activity
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -9,7 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.ViewModelProvider
+import com.example.MainSearchActivity
 import com.example.R
+import com.example.ViewModel.MainSearchActivityViewModel
 import com.example.data.Prop
 
 
@@ -57,6 +59,13 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         return modeledPrice.reversed()
     }
 
+    private inner class ViewHolder {
+        internal var main_text: TextView? = null //Display Name
+        internal var subtitle: TextView? = null  //Display Description
+        internal var can_view_you_online: Button? = null   //Button to set and display status of CanViewYouOnline flag of the class
+
+    }
+
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val rowView = inflater.inflate(R.layout.property_homepage, parent, false)
         this.notifyDataSetChanged()
@@ -74,6 +83,33 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         propertyDiv.layoutParams = params*/
 
         val property = getItem(position) as Prop
+
+        var liked_button = rowView.findViewById<ImageView>(R.id.liked_button)
+
+        liked_button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                var a = v?.getTag(R.id.liked_button)
+                val propertyaa = getItem(position) as Prop
+                var b = v?.getTag().toString() + " is clicked"
+                println("Clicked")
+                lateinit var viewModel: MainSearchActivityViewModel
+                viewModel.likedProperties()
+
+
+
+
+
+
+                /*if (property.liked == "true") {
+                    liked_button.setImageResource(R.drawable.ic_favorite_border_black_24dp)
+                    property.liked = "false"
+                } else {
+                    liked_button.setImageResource(R.drawable.ic_favorite_black_24dp)
+                    property.liked = "true"
+                }*/
+            }
+        })
+
 
 
         val imageBytes = Base64.decode(property.image, 0)

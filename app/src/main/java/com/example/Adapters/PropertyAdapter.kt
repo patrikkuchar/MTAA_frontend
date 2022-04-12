@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import com.demo.retrofithttpmethods.MainActivityViewModel
 import com.example.MainSearchActivity
 import com.example.R
 import com.example.ViewModel.MainSearchActivityViewModel
@@ -17,6 +19,7 @@ import com.example.data.Prop
 
 class PropertyAdapter(private val context: Activity, private val dataSource: ArrayList<Prop>) :
     BaseAdapter() {
+    lateinit var viewModel: MainSearchActivityViewModel
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -75,6 +78,7 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         val areaTextView = rowView.findViewById<TextView>(R.id.area)
         val roomsTextView = rowView.findViewById<TextView>(R.id.rooms)
         val image_property = rowView.findViewById<ImageView>(R.id.prop_image)
+        val heart_button = rowView.findViewById<ImageView>(R.id.liked_button)
 
 
    /*     val propertyDiv = rowView.findViewById<LinearLayout>(R.id.property_model)
@@ -88,15 +92,34 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
 
         liked_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                var a = v?.getTag(R.id.liked_button)
+
                 val propertyaa = getItem(position) as Prop
-                var b = v?.getTag().toString() + " is clicked"
+
                 println("Clicked")
-                lateinit var viewModel: MainSearchActivityViewModel
-                viewModel.likedProperties()
-
-
-
+                println(propertyaa.id)
+                if (propertyaa.liked == null){
+                    propertyaa.liked = true
+                    val a = context as MainSearchActivity
+                    val id = propertyaa.id.toInt()
+                    a.viewModel.likedProperties(id,context)
+                    liked_button.setImageResource(R.drawable.fullhearth_icon)
+                }
+                else{
+                    if(propertyaa.liked == true){
+                        propertyaa.liked = false
+                        val a = context as MainSearchActivity
+                        val id = propertyaa.id.toInt()
+                        a.viewModel.unlikedProperties(id,context)
+                        liked_button.setImageResource(R.drawable.hearth_icon)
+                    }
+                    else{
+                        propertyaa.liked = true
+                        val a = context as MainSearchActivity
+                        val id = propertyaa.id.toInt()
+                        a.viewModel.likedProperties(id,context)
+                        liked_button.setImageResource(R.drawable.fullhearth_icon)
+                    }
+                }
 
 
 
@@ -121,8 +144,24 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         areaTextView.text = property.area.toString() + " m2"
         roomsTextView.text = property.rooms.toString() + "-rooms"
 
-
+        property.liked?.let {
+            if (it == true) {
+                liked_button.setImageResource(R.drawable.fullhearth_icon)
+            } else {
+                liked_button.setImageResource(R.drawable.hearth_icon)
+            }
+        }
 
         return rowView
+    }
+
+    private fun initViewModel() {
+
+        println("SS")
+        var a = MainSearchActivity()
+        viewModel = ViewModelProvider(a).get(MainSearchActivityViewModel::class.java)
+
+
+
     }
 }

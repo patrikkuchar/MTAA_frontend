@@ -14,7 +14,6 @@ import com.example.ViewModel.MainSearchActivityViewModel
 import com.example.data.*
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager
-import com.google.android.material.slider.RangeSlider
 import com.google.android.material.slider.Slider
 
 
@@ -257,7 +256,7 @@ class MainSearchActivity : AppCompatActivity() {
 
 
         var listView = findViewById<ListView>(R.id.propertyListView)
-        var propertyDiv = findViewById<LinearLayout>(R.id.property_model)
+        var propertyDiv = findViewById<LinearLayout>(R.id.property_modelll)
 
         listView.adapter = adapter1
 
@@ -269,7 +268,8 @@ class MainSearchActivity : AppCompatActivity() {
 
         val params: ViewGroup.LayoutParams = listView.layoutParams
         val propertyParams: ViewGroup.LayoutParams = propertyDiv.layoutParams
-        params.height = (propertyParams.height + adapter1.dpToPx(20)) * properties.size
+        //params.height = (propertyParams.height + adapter1.dpToPx(20)) * properties.size
+        params.height = adapter1.dpToPx(140) * properties.size + adapter1.dpToPx(20)
         listView.layoutParams = params
 
 

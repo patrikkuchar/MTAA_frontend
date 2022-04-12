@@ -43,7 +43,19 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         this.dataSource.clear()
     }
 
+    private fun modelPrice(price: String) : String {
+        var modeledPrice = ""
 
+        var count = 0
+        for (i in price.length - 1 downTo 0) {
+            modeledPrice += price[i].toString()
+            if (count % 3 == 2) {
+                modeledPrice += " "
+            }
+            count++
+        }
+        return modeledPrice.reversed()
+    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val rowView = inflater.inflate(R.layout.property_homepage, parent, false)
@@ -68,10 +80,10 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
         image_property.setImageBitmap(image)
-        priceTextView.text = property.price.toString()
+        priceTextView.text = modelPrice(property.price.toString())//property.price.toString()
         addressTextView.text = property.address
-        areaTextView.text = property.area.toString()
-        roomsTextView.text = property.rooms.toString()
+        areaTextView.text = property.area.toString() + " m2"
+        roomsTextView.text = property.rooms.toString() + "-rooms"
 
 
 

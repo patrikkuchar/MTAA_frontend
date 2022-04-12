@@ -30,16 +30,37 @@ interface RetroService {
 
 
     @GET("subregions/{region_id}/")
-    open fun get_subregions(
+    fun get_subregions(
         @Path("region_id") region_id: Int,
         @Header("Authorization") token: String)
     :Call<Subregion_list>
 
 
+    @POST("liked/")
+    fun add_like(
+        @Body params: Add_Liked_Request,
+        @Header("Authorization") token: String)
+    : Call<String>
+
+
+    @DELETE("liked/{LikedId}/delete")
+    fun delete_like(
+        @Path("LikedId") LikedId: Int,
+        @Header("Authorization") token: String)
+    : Call<String>
+
+
+    @GET("liked/")
+    fun get_liked(
+        @Header("Authorization") token: String)
+    : Call<Propety_list>
+
 
     @GET("regions/")
     @Headers("Content-Type: application/json")
-    fun get_regions(@Header("Authorization") token: String) : Call<Region_List>
+    fun get_regions(
+        @Header("Authorization") token: String)
+    : Call<Region_List>
 
 
 

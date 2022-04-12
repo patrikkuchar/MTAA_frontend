@@ -8,5 +8,6 @@ data class Prop(
     val last_updated: String,
     val address: String,
     val owner: String,
-    val image: String
+    val image: String,
+    var liked: Boolean? = false
     )

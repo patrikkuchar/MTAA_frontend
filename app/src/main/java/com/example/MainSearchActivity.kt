@@ -34,6 +34,7 @@ class MainSearchActivity : AppCompatActivity() {
         listView = findViewById<ListView>(R.id.propertyListView)
 
 
+
         initViewModel()
         val pricerange = findViewById<TextView>(R.id.priceRange)
         val sellPropertyButton = findViewById<Button>(R.id.sellPropertyButton)
@@ -100,7 +101,9 @@ class MainSearchActivity : AppCompatActivity() {
 
         fetch_regions()
 
-        fetch_properties("0","0")
+        fetch_liked()
+
+        //fetch_properties("0","0")
 
 
         sellPropertyButton.setOnClickListener {
@@ -125,6 +128,12 @@ class MainSearchActivity : AppCompatActivity() {
         viewModel.get_regions(token="Bearer "+token)
     }
 
+
+    private fun fetch_liked(){
+        val token = SharedPrefManager.getInstance(this).user.token.toString()
+        viewModel.get_liked(token="Bearer "+token)
+
+    }
 
     private fun fetch_subregions(id: Int) {
         if (id != 0){
@@ -158,6 +167,8 @@ class MainSearchActivity : AppCompatActivity() {
             one.name?.let { regionList.add(it) }
         }
 
+
+
         val regionAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,regionList)
         regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         regionSpinner.adapter = regionAdapter
@@ -169,7 +180,7 @@ class MainSearchActivity : AppCompatActivity() {
                 for (region in array){
                     if (region.name == selectedItem.toString()){
                         val id = region.id.toInt()
-                        fetch_properties("0",id.toString())
+                        viewModel.liked.value?.let { fetch_properties(it,"0",id.toString()) }
                         fetch_subregions(id)
                     }
                     else if (selectedItem.toString() == " - "){
@@ -246,10 +257,6 @@ class MainSearchActivity : AppCompatActivity() {
 
     fun onAddField(view: View,properties: List<Prop>) {
 
-
-
-
-
         var adapter1 = PropertyAdapter(this, properties as ArrayList<Prop>)
         adapter1.notifyDataSetInvalidated()
         adapter1.notifyDataSetChanged()
@@ -289,7 +296,7 @@ class MainSearchActivity : AppCompatActivity() {
 
     }
 
-    private fun fetch_properties(subregion: String,region: String) {
+    private fun fetch_properties(likedlist:Propety_list, subregion: String,region: String) {
         var subregion_id = ""
         var region_id = ""
 
@@ -312,7 +319,7 @@ class MainSearchActivity : AppCompatActivity() {
         val rooms = ""
 
         val token = SharedPrefManager.getInstance(this).user.token.toString()
-        viewModel.filter(token="Bearer "+token,region_id,subregion_id,price_min_max,area_min_max,rooms)
+        viewModel.filter(token="Bearer "+token,region_id,subregion_id,price_min_max,area_min_max,rooms,likedlist)
     }
 
     private fun initViewModel() {
@@ -350,6 +357,15 @@ class MainSearchActivity : AppCompatActivity() {
             else{
                 println("HERE I AM :D")
                 subregionSpinner(it)
+            }
+        }
+
+        viewModel.liked.observe(this){
+            if (it == null){
+                Toast.makeText(this@MainSearchActivity, "Error occured", Toast.LENGTH_LONG).show()
+            }
+            else{
+                fetch_properties(it,"0","0")
             }
         }
     }

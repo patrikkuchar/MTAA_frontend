@@ -556,25 +556,26 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageButton"
+                android:id="@+id/bottomNavFavourites"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
                 android:padding="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:layout_constraintWidth_percent="0.25"
-                android:clickable="true"
-                android:focusable="true"
                 app:srcCompat="@drawable/hearth_icon" />
 
             <ImageView
-                android:id="@+id/imageButton5"
+                android:id="@+id/bottomNavMainSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintStart_toEndOf="@+id/bottomNavFavourites"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
                 android:clickable="true"
@@ -582,12 +583,12 @@
                 app:srcCompat="@drawable/house_icon" />
 
             <ImageView
-                android:id="@+id/imageButton6"
+                android:id="@+id/bottomNavBooking"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageButton5"
+                app:layout_constraintStart_toEndOf="@+id/bottomNavMainSearch"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
                 android:clickable="true"
@@ -600,7 +601,7 @@
                 android:layout_height="0dp"
                 android:padding="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageButton6"
+                app:layout_constraintStart_toEndOf="@+id/bottomNavBooking"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.25"
                 android:clickable="true"

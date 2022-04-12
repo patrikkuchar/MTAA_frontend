@@ -45,6 +45,9 @@ class MainSearchActivity : AppCompatActivity() {
         var region = findViewById<Spinner>(R.id.regionSpinner)
         var subregion = findViewById<Spinner>(R.id.subregionSpinner)
 
+        val bottomNavFavourites = findViewById<ImageView>(R.id.bottomNavFavourites)
+        val bottomNavBooking = findViewById<ImageView>(R.id.bottomNavBooking)
+
         val slider_min = findViewById<Slider>(R.id.slider_min)
         val slider_max = findViewById<Slider>(R.id.slider_max)
 
@@ -57,6 +60,14 @@ class MainSearchActivity : AppCompatActivity() {
 
         profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+        bottomNavFavourites.setOnClickListener {
+            startActivity(Intent(this, LikedPropertiesActivity::class.java))
+        }
+
+        bottomNavBooking.setOnClickListener {
+            startActivity(Intent(this, BookingActivity::class.java))
         }
 
         filterSubmitButton.setOnClickListener {

@@ -7,25 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.databinding.ActivityMainBinding
 
-class SellPropertyActivity : AppCompatActivity() {
+class BookingActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.sell_property_view)
+        setContentView(R.layout.booking_view)
 
-        val profileButton = findViewById<ImageView>(R.id.bottomNavProfile)
-        val bottomNavBooking = findViewById<ImageView>(R.id.bottomNavBooking)
+        val bottomNavProfile = findViewById<ImageView>(R.id.bottomNavProfile)
         val bottomNavMainSearch = findViewById<ImageView>(R.id.bottomNavMainSearch)
         val bottomNavFavourites = findViewById<ImageView>(R.id.bottomNavFavourites)
 
-        profileButton.setOnClickListener {
+        bottomNavProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
-        }
-
-        bottomNavBooking.setOnClickListener {
-            startActivity(Intent(this, BookingActivity::class.java))
         }
 
         bottomNavMainSearch.setOnClickListener {

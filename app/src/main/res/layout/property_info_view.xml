@@ -97,7 +97,7 @@
                                     app:srcCompat="@drawable/house_icon" />
 
                                 <TextView
-                                    android:id="@+id/textView38"
+                                    android:id="@+id/propertyInfoRooms"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -108,10 +108,11 @@
 
                             <LinearLayout
                                 android:id="@+id/linearLayout6"
-                                android:layout_width="151dp"
+                                android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHeight_percent="0.25"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
                                 tools:layout_constraintHeight_percent="0.25">
@@ -125,7 +126,7 @@
                                     app:srcCompat="@drawable/houseplan_icon" />
 
                                 <TextView
-                                    android:id="@+id/textView39"
+                                    android:id="@+id/propertyInfoSize"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -153,7 +154,7 @@
                                     app:srcCompat="@drawable/address_icon" />
 
                                 <TextView
-                                    android:id="@+id/textView40"
+                                    android:id="@+id/propertyInfoAddress"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -163,8 +164,8 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="151dp"
-                                android:layout_height="56dp"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
                                 android:orientation="horizontal"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +181,7 @@
                                     app:srcCompat="@drawable/euro_icon" />
 
                                 <TextView
-                                    android:id="@+id/textView41"
+                                    android:id="@+id/propertyInfoPrice"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -209,7 +210,7 @@
                             android:layout_height="match_parent">
 
                             <ImageView
-                                android:id="@+id/imageView34"
+                                android:id="@+id/propertyInfoImg"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -229,7 +230,7 @@
                                 app:layout_constraintHeight_percent="0.15"
                                 app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView34" />
+                                app:layout_constraintTop_toBottomOf="@+id/propertyInfoImg" />
 
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -251,7 +252,7 @@
                                     app:srcCompat="@drawable/avatar_icon" />
 
                                 <TextView
-                                    android:id="@+id/textView43"
+                                    android:id="@+id/propertyInfoOwner"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
@@ -271,7 +272,7 @@
                 app:srcCompat="@drawable/house_icon" />
 
             <TextView
-                android:id="@+id/textView44"
+                android:id="@+id/propertyInfoInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"

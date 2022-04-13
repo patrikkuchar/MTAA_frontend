@@ -279,10 +279,21 @@ class MainSearchActivity : AppCompatActivity() {
         listView.adapter = adapter1
 
         listView.setOnItemClickListener(){adapterView, view, position, id ->
-            val itemAtPos = adapterView.getItemAtPosition(position)
+            val itemAtPos = adapterView.getItemAtPosition(position) as Prop
             val itemIdAtPos = adapterView.getItemIdAtPosition(position)
             Toast.makeText(this, "Click on item at $itemAtPos its item id $itemIdAtPos", Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, PropertyInfoActivity::class.java))
+
+            val propertyId = itemAtPos.id.toInt()
+            //
+            //
+
+            //pass property
+
+
+            val intent = (Intent(this, PropertyInfoActivity::class.java))
+            intent.putExtra("propertyId", propertyId)
+            startActivity(intent)
+
         }
 
         val params: ViewGroup.LayoutParams = listView.layoutParams

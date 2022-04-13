@@ -28,6 +28,12 @@ interface RetroService {
 
     : Call<Propety_list>
 
+    @GET("property/{id}/")
+    @Headers("Content-Type: application/json")
+    fun get_property(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String)
+    :Call<PropertyInfoData>
 
     @GET("subregions/{region_id}/")
     fun get_subregions(

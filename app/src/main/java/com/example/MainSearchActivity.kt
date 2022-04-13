@@ -282,6 +282,7 @@ class MainSearchActivity : AppCompatActivity() {
             val itemAtPos = adapterView.getItemAtPosition(position)
             val itemIdAtPos = adapterView.getItemIdAtPosition(position)
             Toast.makeText(this, "Click on item at $itemAtPos its item id $itemIdAtPos", Toast.LENGTH_LONG).show()
+            startActivity(Intent(this, PropertyInfoActivity::class.java))
         }
 
         val params: ViewGroup.LayoutParams = listView.layoutParams

@@ -48,6 +48,12 @@
         <activity android:name=".BookingActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
+        <activity android:name=".PropertyInfoActivity"
+            android:theme="@style/Theme.PKCP.NoActionBar">
+        </activity>
+        <activity android:name=".ChangePasswordActivity"
+            android:theme="@style/Theme.PKCP.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

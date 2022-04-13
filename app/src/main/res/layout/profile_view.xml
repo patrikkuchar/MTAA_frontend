@@ -123,7 +123,7 @@
                         android:layout_height="match_parent">
 
                         <Button
-                            android:id="@+id/button7"
+                            android:id="@+id/logoutButton"
                             android:layout_width="122dp"
                             android:layout_height="32dp"
                             android:layout_marginEnd="30dp"
@@ -136,7 +136,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <Button
-                            android:id="@+id/button6"
+                            android:id="@+id/changePasswordButton"
                             android:layout_width="141dp"
                             android:layout_height="31dp"
                             android:layout_marginStart="30dp"
@@ -164,7 +164,7 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/profileSellPropertyButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="30dp"
@@ -357,7 +357,7 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/button8"
+                            android:id="@+id/editPropertyButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="40dp"

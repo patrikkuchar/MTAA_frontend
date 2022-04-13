@@ -26,16 +26,38 @@ class ProfileActivity : AppCompatActivity() {
         val bottomNavMainSearch = findViewById<ImageView>(R.id.bottomNavMainSearch)
         val bottomNavFavourites = findViewById<ImageView>(R.id.bottomNavFavourites)
 
+        val changePasswordButton = findViewById<Button>(R.id.changePasswordButton)
+        val profileSellPropertyButton = findViewById<Button>(R.id.profileSellPropertyButton)
+        val editPropertyButton = findViewById<Button>(R.id.editPropertyButton)
+        val logoutButton = findViewById<Button>(R.id.logoutButton)
+
         bottomNavBooking.setOnClickListener {
             startActivity(Intent(this, BookingActivity::class.java))
         }
 
         bottomNavMainSearch.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainSearchActivity::class.java))
         }
 
         bottomNavFavourites.setOnClickListener {
             startActivity(Intent(this, LikedPropertiesActivity::class.java))
+        }
+
+        changePasswordButton.setOnClickListener {
+            startActivity(Intent(this, ChangePasswordActivity::class.java))
+        }
+
+        profileSellPropertyButton.setOnClickListener {
+            startActivity(Intent(this, SellPropertyActivity::class.java))
+        }
+
+        editPropertyButton.setOnClickListener {
+            startActivity(Intent(this, SellPropertyActivity::class.java))
+        }
+
+        logoutButton.setOnClickListener {
+            //vymazať manazera
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         deletePropertyDiv.visibility = LinearLayout.GONE

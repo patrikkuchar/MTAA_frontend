@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/primary_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reality Trust PKCP"
+                android:textAlignment="center"
+                android:textColor="#222222"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView22"
+                android:layout_width="match_parent"
+                android:layout_height="313dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/house_icon" />
+
+            <Button
+                android:id="@+id/bookVideoCallButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/round_button"
+                android:text="Book Video Call"
+                android:textAlignment="center" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_corners"
+                android:orientation="horizontal">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.4">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout5"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHeight_percent="0.25"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/imageView30"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="15dp"
+                                    app:srcCompat="@drawable/house_icon" />
+
+                                <TextView
+                                    android:id="@+id/textView38"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal|center_vertical"
+                                    android:text="4-rooms"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout6"
+                                android:layout_width="151dp"
+                                android:layout_height="0dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+                                tools:layout_constraintHeight_percent="0.25">
+
+                                <ImageView
+                                    android:id="@+id/imageView31"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="15dp"
+                                    app:srcCompat="@drawable/houseplan_icon" />
+
+                                <TextView
+                                    android:id="@+id/textView39"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="80 m2"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearLayout7"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHeight_percent="0.25"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                                <ImageView
+                                    android:id="@+id/imageView32"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="15dp"
+                                    app:srcCompat="@drawable/address_icon" />
+
+                                <TextView
+                                    android:id="@+id/textView40"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Lorencova 5, Krompachy"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="151dp"
+                                android:layout_height="56dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                                <ImageView
+                                    android:id="@+id/imageView33"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="15dp"
+                                    app:srcCompat="@drawable/euro_icon" />
+
+                                <TextView
+                                    android:id="@+id/textView41"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="135 000 €"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imageView34"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHeight_percent="0.60"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/houseplan_icon" />
+
+                            <TextView
+                                android:id="@+id/textView42"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:gravity="center"
+                                android:text="1687 € / m2"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHeight_percent="0.15"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/imageView34" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="horizontal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView42">
+
+                                <ImageView
+                                    android:id="@+id/imageView35"
+                                    android:layout_width="100dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="15dp"
+                                    app:srcCompat="@drawable/avatar_icon" />
+
+                                <TextView
+                                    android:id="@+id/textView43"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="Patrik Kuchár" />
+                            </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView36"
+                android:layout_width="match_parent"
+                android:layout_height="223dp"
+                android:layout_margin="15dp"
+                app:srcCompat="@drawable/house_icon" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/round_corners"
+                android:padding="10dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget diam pellentesque, semper nunc id, aliquam ex. Donec nisi enim, fringilla ut magna ut, aliquam dapibus est. Ut tempor eros eget risus blandit, pulvinar elementum magna ultricies. Sed purus enim, iaculis quis dolor in, ultricies lacinia tellus. Cras orci mi, tincidunt quis posuere eu, placerat sed sapien. Sed sit amet justo tellus. Donec eget diam ac tortor ullamcorper porttitor at et diam. Curabitur consectetur erat tempor, consectetur massa sed, sagittis nibh. Vestibulum at aliquam turpis, id pulvinar libero. Maecenas fringilla pharetra velit, in accumsan lectus efficitur a. Phasellus gravida tortor in vehicula mattis. Ut laoreet mi sed velit cursus molestie. Praesent lacinia nibh et semper aliquet. Nullam posuere, elit ut tristique consectetur, elit magna cursus diam, vel pellentesque erat dui non leo. Praesent lorem quam, faucibus eget pulvinar in, gravida vel nibh. In consectetur velit vel neque suscipit hendrerit." />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal"></LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/bookingDiv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/filter_div"
+        android:elevation="15dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@drawable/favourite_div"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintWidth_percent="0.9">
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Date and Time picker"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date:"
+                android:textSize="20sp" />
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView46">
+
+                        <EditText
+                            android:id="@+id/editTextNumber"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="number" />
+
+                        <TextView
+                            android:id="@+id/textView45"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text=":" />
+
+                        <EditText
+                            android:id="@+id/editTextNumber2"
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView46"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time:"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/dateTimePickerCancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/dateTimePickerComfirmButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:text="Comfirm" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/round_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bottomNavFavourites"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintWidth_percent="0.25"
+                app:srcCompat="@drawable/hearth_icon" />
+
+            <ImageView
+                android:id="@+id/bottomNavMainSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bottomNavFavourites"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25"
+                app:srcCompat="@drawable/house_icon" />
+
+            <ImageView
+                android:id="@+id/bottomNavBooking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bottomNavMainSearch"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25"
+                app:srcCompat="@drawable/phone_icon" />
+
+            <ImageView
+                android:id="@+id/bottomNavProfile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bottomNavBooking"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25"
+                app:srcCompat="@drawable/avatar_icon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+</androidx.constraintlayout.widget.ConstraintLayout>

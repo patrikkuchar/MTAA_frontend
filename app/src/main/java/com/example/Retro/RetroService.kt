@@ -25,7 +25,6 @@ interface RetroService {
         @Path("area_min_max") area_min_max: String,
         @Path("rooms") rooms: String,
         @Header("Authorization") token: String)
-
     : Call<Propety_list>
 
     @GET("property/{id}/")
@@ -33,7 +32,7 @@ interface RetroService {
     fun get_property(
         @Path("id") id: Int,
         @Header("Authorization") token: String)
-    :Call<PropertyInfoData>
+    :Call<PropertyInfoDataOne>
 
     @GET("subregions/{region_id}/")
     fun get_subregions(

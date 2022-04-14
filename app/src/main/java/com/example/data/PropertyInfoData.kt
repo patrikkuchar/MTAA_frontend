@@ -11,6 +11,6 @@ data class PropertyInfoData(
     val address: String,
     val info: String,
     val owner: String,
-    val owner_id: Int
-   // val images: List<String>
+    val owner_id: Int,
+    val images: List<String>
 )

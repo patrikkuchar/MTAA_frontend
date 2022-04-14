@@ -118,8 +118,8 @@ class PropertyInfoActivity : AppCompatActivity() {
         propertyInfoOwner.text = property.owner
         propertyInfoInfo.text = property.info
 
-       // val imageBytes = Base64.decode(property.images[0], 0)
-      //  val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-     //   propertyInfoImg.setImageBitmap(image)
+        val imageBytes = Base64.decode(property.images[0], 0)
+        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        propertyInfoImg.setImageBitmap(image)
     }
 }

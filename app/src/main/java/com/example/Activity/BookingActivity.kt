@@ -94,11 +94,11 @@ class BookingActivity : AppCompatActivity() {
         }
 
         val params1: ViewGroup.LayoutParams = sellingListView.layoutParams
-        params1.height = adapter1.dpToPx(210) * sellingBookings.size + adapter1.dpToPx(20)
+        params1.height = adapter1.dpToPx(220) * sellingBookings.size + adapter1.dpToPx(20)
         sellingListView.layoutParams = params1
 
         val params2: ViewGroup.LayoutParams = buyingListView.layoutParams
-        params2.height = adapter2.dpToPx(210) * buyingBookings.size + adapter2.dpToPx(20)
+        params2.height = adapter2.dpToPx(220) * buyingBookings.size + adapter2.dpToPx(20)
         buyingListView.layoutParams = params2
 /*
         var listView = findViewById<ListView>(R.id.propertyListView)

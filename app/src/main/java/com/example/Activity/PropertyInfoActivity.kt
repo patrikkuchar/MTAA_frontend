@@ -43,18 +43,52 @@ class PropertyInfoActivity : AppCompatActivity() {
         val bookVideoCallButton = findViewById<Button>(R.id.bookVideoCallButton)
         val dateTimePickerCancelButton = findViewById<Button>(R.id.dateTimePickerCancelButton)
 
+        val calendarPicker = findViewById<CalendarView>(R.id.calendarPicker)
+        val booking_hoursInput = findViewById<EditText>(R.id.booking_hoursInput)
+        val booking_minutesInput = findViewById<EditText>(R.id.booking_minutesInput)
+        val dateTimePickerComfirmButton = findViewById<Button>(R.id.dateTimePickerComfirmButton)
+
+        var booking_date = ""
+
         initViewModel()
         fetch_property()
 
 
-
-
-
-
-
-
-
         bookingDiv.visibility = LinearLayout.GONE
+
+        calendarPicker.setOnDateChangeListener { calendarView, year, month, day ->
+            booking_date = "$year-${month+1}-$day"
+        }
+
+        dateTimePickerComfirmButton.setOnClickListener {
+            if (booking_hoursInput.text.toString().isNotEmpty() && booking_minutesInput.text.toString().isNotEmpty()){
+                val hours = booking_hoursInput.text.toString().toInt()
+                val minutes = booking_minutesInput.text.toString().toInt()
+                if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59){
+                    Toast.makeText(this, "Please enter valid time", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    booking_date += " ${hours.toString()}:${minutes.toString()}:00"
+
+                    val token = SharedPrefManager.getInstance(this).user.token.toString()
+                    var property_id = intent.getIntExtra("propertyId", 0)
+
+                    if (property_id != null) {
+                        viewModel.add_booking(token="Bearer "+token, propertyId=property_id.toInt(), startDate=booking_date)
+
+                        Toast.makeText(this, "Booking added", Toast.LENGTH_SHORT).show()
+                        bookingDiv.visibility = LinearLayout.GONE
+                    }
+                }
+            }
+            else
+                Toast.makeText(this, "Please enter valid time", Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+
 
         bookVideoCallButton.setOnClickListener {
             bookingDiv.visibility = LinearLayout.VISIBLE

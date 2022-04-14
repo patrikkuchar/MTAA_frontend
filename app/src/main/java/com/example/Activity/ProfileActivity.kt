@@ -20,8 +20,6 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.profile_view)
 
 
-
-
         val deletePropertyButton = findViewById<Button>(R.id.deletePropertyButton)
         var deletePropertyDiv = findViewById<LinearLayout>(R.id.deletePropertyDiv)
         val profileDecisionYesButton = findViewById<Button>(R.id.profileDecisionYesButton)

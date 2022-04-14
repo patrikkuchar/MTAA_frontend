@@ -2,17 +2,20 @@ package com.example.Adapters
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.Activity.BookingActivity
 import com.example.Activity.MainSearchActivity
 import com.example.R
 import com.example.ViewModel.BookingActivityViewModel
+import com.example.WebRTC.RTCActivity
 import com.example.data.BookingBuyerData
 import com.example.storage.SharedPrefManager
 
@@ -85,6 +88,13 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
                 notifyDataSetChanged()
             }
         })
+
+        booking_videocall_button.setOnClickListener {
+            val intent = Intent(context, RTCActivity::class.java)
+            intent.putExtra("meeting_id", booking.id)
+            intent.putExtra("isJoin", true)
+            startActivity(context, intent, null)
+        }
 
 
         val imageBytes = Base64.decode(booking.image, 0)

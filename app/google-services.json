@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1091403075956",
+    "project_id": "mtaa-pkcp",
+    "storage_bucket": "mtaa-pkcp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091403075956:android:e74eff2909c8e877a99c21",
+        "android_client_info": {
+          "package_name": "com.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091403075956-u7odqd0a785jdj3hh50ivb1n1agf4h3q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV_CtmZ4ZcN2mq0LESxcHtGiID5pxnoUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091403075956-u7odqd0a785jdj3hh50ivb1n1agf4h3q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

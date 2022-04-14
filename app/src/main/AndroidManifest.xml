@@ -39,7 +39,7 @@
         <activity android:name=".Activity.ProfileActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".TestMainActivity"
+        <activity android:name=".Activity.TestMainActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
         <activity android:name=".Activity.LikedPropertiesActivity"

@@ -1,13 +1,11 @@
 package com.example.ViewModel
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.Retro.RetroInstance
 import com.example.Retro.RetroService
-import com.example.data.PropertyInfoData
-import com.example.data.PropertyInfoDataOne
-import com.example.data.Propety_list
-import com.example.data.Subregion_list
+import com.example.data.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,5 +35,30 @@ class PropertyInfoViewModel: ViewModel() {
 
             }
         })
+    }
+
+    fun add_booking(token:String,propertyId: Int,startDate:String) {
+        var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
+        val request = AddBookingData(propertyId,startDate)
+        val call = retroInstance.add_booking(request,token)
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                println("fail1")
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful) {
+                    if (response.code().toInt() == 201) {
+                        println("success")
+                        Toast.makeText(null, "Booking Successful Added", Toast.LENGTH_SHORT).show()
+                    } else {
+                        println("fail2")
+                    }
+                } else {
+                    println("fail3")
+                }
+            }
+        })
+
     }
 }

@@ -40,6 +40,13 @@ interface RetroService {
         @Header("Authorization") token: String)
     :Call<Subregion_list>
 
+    @POST("booking/")
+    fun add_booking(
+        @Body params: AddBookingData,
+        @Header("Authorization") token: String)
+    :Call<String>
+
+
     @GET("booking/")
     fun get_bookings(
         @Header("Authorization") token: String)

@@ -1,9 +1,10 @@
-package com.example
+package com.example.Activity
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.Adapters.MyListAdapter
+import com.example.R
 
 
 class TestMainActivity : AppCompatActivity() {

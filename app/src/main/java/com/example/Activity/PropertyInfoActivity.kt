@@ -1,4 +1,4 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -6,15 +6,13 @@ import android.os.Bundle
 import android.util.Base64
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.ViewModel.MainSearchActivityViewModel
+import com.example.R
 import com.example.ViewModel.PropertyInfoViewModel
 import com.example.data.PropertyInfoData
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager
-import com.squareup.picasso.Picasso
 
 class PropertyInfoActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration

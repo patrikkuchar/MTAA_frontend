@@ -3,12 +3,8 @@ package com.example.ViewModel
 import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.MainSearchActivity
 import com.example.Retro.RetroInstance
 import com.example.Retro.RetroService
-import com.example.data.Add_Liked_Request
-import com.example.data.Prop
-import com.example.data.PropertyInfoDataOne
 import com.example.data.Propety_list
 import com.example.storage.SharedPrefManager
 import retrofit2.Call

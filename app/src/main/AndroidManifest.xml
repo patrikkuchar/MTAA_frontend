@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PKCP">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PKCP.NoActionBar">
@@ -21,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".Activity.RegisterActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".MainSearchActivity"
+        <activity android:name=".Activity.MainSearchActivity"
             android:theme="@style/Theme.PKCP.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -33,25 +33,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SellPropertyActivity"
+        <activity android:name=".Activity.SellPropertyActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".ProfileActivity"
+        <activity android:name=".Activity.ProfileActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
         <activity android:name=".TestMainActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".LikedPropertiesActivity"
+        <activity android:name=".Activity.LikedPropertiesActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".BookingActivity"
+        <activity android:name=".Activity.BookingActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".PropertyInfoActivity"
+        <activity android:name=".Activity.PropertyInfoActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
-        <activity android:name=".ChangePasswordActivity"
+        <activity android:name=".Activity.ChangePasswordActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
     </application>

@@ -2,8 +2,7 @@ package com.example.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.MainSearchActivity
+import com.example.Activity.MainSearchActivity
 import com.example.Retro.RetroInstance
 import com.example.Retro.RetroService
 import com.example.data.*

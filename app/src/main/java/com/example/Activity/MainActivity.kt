@@ -1,4 +1,4 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,9 +13,10 @@ import com.example.data.LoginRequestData
 import com.example.databinding.ActivityMainBinding
 import com.example.data.LoginResponseData
 import androidx.lifecycle.Observer
+import com.example.R
+import com.example.TestMainActivity
 import com.example.data.User
 import com.example.storage.SharedPrefManager
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 

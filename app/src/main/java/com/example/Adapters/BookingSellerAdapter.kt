@@ -9,12 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
-import com.example.MainSearchActivity
+import com.example.Activity.MainSearchActivity
 import com.example.R
 import com.example.ViewModel.BookingActivityViewModel
-import com.example.data.BookingBuyerData
 import com.example.data.BookingSellerData
-import com.example.data.Prop
 
 class BookingSellerAdapter(private val context: Activity, private val dataSource: ArrayList<BookingSellerData>) : BaseAdapter() {
     lateinit var viewModel: BookingActivityViewModel

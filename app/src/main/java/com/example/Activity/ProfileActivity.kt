@@ -1,4 +1,4 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
+import com.example.R
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager
 

@@ -1,4 +1,4 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.Adapters.PropertyAdapter
 import com.example.Adapters.PropertyLikedAdapter
+import com.example.R
 import com.example.ViewModel.LikedPropertiesActivityViewModel
-import com.example.ViewModel.MainSearchActivityViewModel
 import com.example.data.Prop
-import com.example.databinding.ActivityMainBinding
 import com.example.databinding.LikedPropertiesViewBinding
 import com.example.storage.SharedPrefManager
 

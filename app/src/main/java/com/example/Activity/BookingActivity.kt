@@ -1,11 +1,10 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,9 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.Adapters.BookingBuyerAdapter
 import com.example.Adapters.BookingSellerAdapter
-import com.example.Adapters.PropertyAdapter
+import com.example.R
 import com.example.ViewModel.BookingActivityViewModel
-import com.example.ViewModel.MainSearchActivityViewModel
 import com.example.data.*
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager

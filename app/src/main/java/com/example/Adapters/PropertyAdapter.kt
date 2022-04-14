@@ -8,11 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import com.demo.retrofithttpmethods.MainActivityViewModel
-import com.example.LikedPropertiesActivity
-import com.example.MainSearchActivity
+import com.example.Activity.MainSearchActivity
 import com.example.R
 import com.example.ViewModel.LikedPropertiesActivityViewModel
 import com.example.ViewModel.MainSearchActivityViewModel

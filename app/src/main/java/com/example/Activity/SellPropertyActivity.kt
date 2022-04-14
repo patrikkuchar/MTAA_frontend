@@ -1,29 +1,27 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
+import com.example.R
 import com.example.databinding.ActivityMainBinding
 
-class ChangePasswordActivity : AppCompatActivity() {
+class SellPropertyActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.change_password_view)
+        setContentView(R.layout.sell_property_view)
 
-        val bottomNavProfile = findViewById<ImageView>(R.id.bottomNavProfile)
+        val profileButton = findViewById<ImageView>(R.id.bottomNavProfile)
         val bottomNavBooking = findViewById<ImageView>(R.id.bottomNavBooking)
         val bottomNavMainSearch = findViewById<ImageView>(R.id.bottomNavMainSearch)
         val bottomNavFavourites = findViewById<ImageView>(R.id.bottomNavFavourites)
 
-
-        bottomNavProfile.setOnClickListener {
+        profileButton.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 

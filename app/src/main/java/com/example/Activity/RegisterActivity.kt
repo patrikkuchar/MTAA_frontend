@@ -1,4 +1,4 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
+import com.example.R
 import com.example.ViewModel.RegisterActivityViewModel
 import com.example.data.RegisterRequestData
 import com.example.data.RegisterResponseData

@@ -1,4 +1,4 @@
-package com.example
+package com.example.Activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,12 +10,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.Adapters.PropertyAdapter
+import com.example.R
 import com.example.ViewModel.MainSearchActivityViewModel
 import com.example.data.*
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager
 import com.google.android.material.slider.Slider
-import kotlinx.coroutines.android.awaitFrame
 
 
 class MainSearchActivity : AppCompatActivity() {

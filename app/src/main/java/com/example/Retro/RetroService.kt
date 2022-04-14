@@ -71,6 +71,13 @@ interface RetroService {
         @Header("Authorization") token: String)
     : Call<Region_List>
 
+    //edit password
+    @PATCH("user/edit/")
+    fun edit_password(
+        @Body params: Edit_Password_Request,
+        @Header("Authorization") token: String)
+    : Call <ChangePasswordResponse>
+
 
 
 }

@@ -15,6 +15,7 @@ import com.example.data.*
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager
 import com.google.android.material.slider.Slider
+import kotlinx.coroutines.android.awaitFrame
 
 
 class MainSearchActivity : AppCompatActivity() {
@@ -23,20 +24,31 @@ class MainSearchActivity : AppCompatActivity() {
     private var parentLinearLayout: LinearLayout? = null
     private lateinit var listView: ListView
     lateinit var viewModel: MainSearchActivityViewModel
-
+    private var Properties : Propety_list? = null
+    private var Region_id: Int = 0
+    private var Subregion_id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_search_view)
 
-       parentLinearLayout = findViewById(R.id.properties)
+        parentLinearLayout = findViewById(R.id.properties)
 
         listView = findViewById<ListView>(R.id.propertyListView)
 
 
 
         initViewModel()
+
+        fetch_liked()
+
+
+
+
         val pricerange = findViewById<TextView>(R.id.priceRange)
+
+        val arearange = findViewById<TextView>(R.id.areaRange)
+
         val sellPropertyButton = findViewById<Button>(R.id.sellPropertyButton)
         val filterButton = findViewById<Button>(R.id.filterButton)
         val filterCloseButton = findViewById<Button>(R.id.filterCloseButton)
@@ -49,38 +61,45 @@ class MainSearchActivity : AppCompatActivity() {
         val bottomNavFavourites = findViewById<ImageView>(R.id.bottomNavFavourites)
         val bottomNavBooking = findViewById<ImageView>(R.id.bottomNavBooking)
 
+        val slider_min_area = findViewById<Slider>(R.id.slider_min_area)
+        val slider_max_area = findViewById<Slider>(R.id.slider_max_area)
+
         val slider_min = findViewById<Slider>(R.id.slider_min)
         val slider_max = findViewById<Slider>(R.id.slider_max)
 
         filterDiv.visibility = LinearLayout.GONE
 
-        val test = SharedPrefManager.getInstance(this).user
+        val user = SharedPrefManager.getInstance(this).user
 
         var greeting = findViewById<TextView>(R.id.greetingText)
-        greeting.setText(test.name + " " + test.surname)
+        greeting.setText(user.name + " " + user.surname)
 
         profileButton.setOnClickListener {
+            finish()
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
         bottomNavFavourites.setOnClickListener {
+            finish()
             startActivity(Intent(this, LikedPropertiesActivity::class.java))
         }
 
         bottomNavBooking.setOnClickListener {
+            finish()
             startActivity(Intent(this, BookingActivity::class.java))
         }
 
         filterSubmitButton.setOnClickListener {
-            val min = slider_min.value.toInt().toString()
-            val max = slider_max.value.toInt().toString()
-            val region_id = region.selectedItemId
-            val subregion_id = subregion.selectedItemId
-            println("AHOOOOJ")
+            filterDiv.visibility = LinearLayout.GONE
+            fetch_properties(Properties!!,Subregion_id.toString(),Region_id.toString())
+
         }
 
         var min_price = 10000
         var max_price = 1000000
+
+        var min_area = 10
+        var max_area = 100
 
         slider_min.addOnChangeListener { slider, value, fromUser ->
             min_price = value.toInt()
@@ -109,10 +128,36 @@ class MainSearchActivity : AppCompatActivity() {
 
         }
 
+        slider_min_area.addOnChangeListener { slider, value, fromUser ->
+            min_area = value.toInt()
+            var min = min_area.toString()
 
-        fetch_regions()
+            min = java.text.NumberFormat.getIntegerInstance().format(min.toInt()).replace(",", " ")
 
-        fetch_liked()
+
+            var max = max_area.toString()
+
+            max = java.text.NumberFormat.getIntegerInstance().format(max.toInt()).replace(",", " ")
+            arearange.setText("$min" + " m " + " - " + "$max" + " m")
+        }
+
+        slider_max_area.addOnChangeListener { slider, value, fromUser ->
+            max_area = value.toInt()
+            var min = min_area.toString()
+
+            min = java.text.NumberFormat.getIntegerInstance().format(min.toInt()).replace(",", " ")
+
+            var max = max_area.toString()
+
+            max = java.text.NumberFormat.getIntegerInstance().format(max.toInt()).replace(",", " ")
+            arearange.setText("$min" + " m " + " - " + "$max" + " m")
+        }
+
+
+
+
+
+
 
         //fetch_properties("0","0")
 
@@ -143,6 +188,8 @@ class MainSearchActivity : AppCompatActivity() {
     private fun fetch_liked(){
         val token = SharedPrefManager.getInstance(this).user.token.toString()
         viewModel.get_liked(token="Bearer "+token)
+        Thread.sleep(1_000)
+        fetch_regions()
 
     }
 
@@ -183,23 +230,37 @@ class MainSearchActivity : AppCompatActivity() {
         val regionAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,regionList)
         regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         regionSpinner.adapter = regionAdapter
-        //on click listener
+        while (Properties == null){
+            println("Properties is null")
+        }
         regionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 // Display the selected item text on text view
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                for (region in array){
-                    if (region.name == selectedItem.toString()){
-                        val id = region.id.toInt()
-                        viewModel.liked.value?.let { fetch_properties(it,"0",id.toString()) }
-                        fetch_subregions(id)
-                    }
-                    else if (selectedItem.toString() == " - "){
-                        fetch_subregions(0)
 
-                    }
+                val selectedItem = parent.getItemAtPosition(position).toString()
+
+                if (selectedItem.toString() == " - "){
+                    fetch_properties(Properties!!,"0","0")
+                    Toast.makeText(applicationContext, "Selected: All regions", Toast.LENGTH_LONG).show()
                 }
-                Toast.makeText(applicationContext, "Selected: $selectedItem", Toast.LENGTH_LONG).show()
+                else{
+                    for (region in array){
+                        if (region.name == selectedItem.toString()){
+                            val id = region.id.toInt()
+                            Region_id = id
+                            viewModel.liked.value?.let { fetch_properties(it,"0",id.toString()) }
+                            fetch_subregions(id)
+                        }
+                        else if (selectedItem.toString() == " - "){
+                            fetch_subregions(0)
+
+                        }
+                    }
+                    Toast.makeText(applicationContext, "Selected: $selectedItem", Toast.LENGTH_LONG).show()
+                }
+
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -244,17 +305,25 @@ class MainSearchActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 // Display the selected item text on text view
                 val selectedItem = parent.getItemAtPosition(position).toString()
-                Toast.makeText(applicationContext, "Selected: $selectedItem", Toast.LENGTH_LONG).show()
 
-                for (subregion in array){
-                    if (subregion.name == selectedItem.toString()){
-                        val subregion_id = subregion.id.toInt()
-                        //fetch_properties(subregion_id.toString(),region_id)
-                    }
-                    else if (selectedItem.toString() == " - "){
-                        //fetch_properties("0",region_id)
-                    }
+
+                if (selectedItem.toString() == " - "){
+                    Region_id = region_id.toInt()
+                    fetch_properties(Properties!!,"0",region_id)
+                    Toast.makeText(applicationContext, "Selected: All Subregions", Toast.LENGTH_LONG).show()
                 }
+                else{
+                    for (subregion in array){
+                        if (subregion.name == selectedItem.toString()){
+                            val subregion_id = subregion.id.toInt()
+                            Subregion_id = subregion_id
+                            fetch_properties(Properties!!,subregion = subregion_id.toString(),region = region_id)
+                        }
+                    }
+                    Toast.makeText(applicationContext, "Selected: $selectedItem", Toast.LENGTH_LONG).show()
+                }
+
+
 
 
             }
@@ -284,10 +353,6 @@ class MainSearchActivity : AppCompatActivity() {
             Toast.makeText(this, "Click on item at $itemAtPos its item id $itemIdAtPos", Toast.LENGTH_LONG).show()
 
             val propertyId = itemAtPos.id.toInt()
-            //
-            //
-
-            //pass property
 
 
             val intent = (Intent(this, PropertyInfoActivity::class.java))
@@ -315,9 +380,7 @@ class MainSearchActivity : AppCompatActivity() {
 
     }
 
-    fun add_favourite(){
 
-    }
 
     private fun fetch_properties(likedlist:Propety_list, subregion: String,region: String) {
         var subregion_id = ""
@@ -335,11 +398,54 @@ class MainSearchActivity : AppCompatActivity() {
             subregion_id = subregion.toString()
             region_id = region.toString()
         }
-        val price_min_max = ""
+        val price_min = findViewById<com.google.android.material.slider.Slider>(R.id.slider_min)
+        val price_max = findViewById<com.google.android.material.slider.Slider>(R.id.slider_max)
+        val min = price_min.value.toInt()
+        val max = price_max.value.toInt()
 
-        val area_min_max = ""
 
-        val rooms = ""
+        //area
+        val area_min = findViewById<com.google.android.material.slider.Slider>(R.id.slider_min_area)
+        val area_max = findViewById<com.google.android.material.slider.Slider>(R.id.slider_max_area)
+        val min_area = area_min.value.toInt()
+        val max_area = area_max.value.toInt()
+
+
+        val price_min_max = "$min"+"-"+"$max"
+
+        val area_min_max = "$min_area"+"-"+"$max_area"
+
+        //checkbox
+        val rooms1 = findViewById<CheckBox>(R.id.rooms1).isChecked
+        val rooms2 = findViewById<CheckBox>(R.id.rooms2).isChecked
+        val rooms3 = findViewById<CheckBox>(R.id.rooms3).isChecked
+        val rooms4 = findViewById<CheckBox>(R.id.rooms4).isChecked
+        val rooms5 = findViewById<CheckBox>(R.id.rooms5).isChecked
+        val rooms6 = findViewById<CheckBox>(R.id.rooms6).isChecked
+
+        //String list of rooms based on checked checkboxes with delimeter -
+        var rooms = ""
+        if(rooms1){
+            rooms += "1-"
+        }
+        if(rooms2){
+            rooms += "2-"
+        }
+        if(rooms3){
+            rooms += "3-"
+        }
+        if(rooms4){
+            rooms += "4-"
+        }
+        if(rooms5){
+            rooms += "5-"
+        }
+        if(rooms6){
+            rooms += "6-"
+        }
+        if(rooms.length > 0){
+            rooms = rooms.substring(0, rooms.length - 1)
+        }
 
         val token = SharedPrefManager.getInstance(this).user.token.toString()
         viewModel.filter(token="Bearer "+token,region_id,subregion_id,price_min_max,area_min_max,rooms,likedlist)
@@ -358,6 +464,7 @@ class MainSearchActivity : AppCompatActivity() {
                 Toast.makeText(this@MainSearchActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
                 var View = findViewById<ConstraintLayout>(R.id.my_root)
+                Properties = it
                 onAddField(View,it.properties)
                 println("hre")
             }
@@ -369,7 +476,10 @@ class MainSearchActivity : AppCompatActivity() {
                 Toast.makeText(this@MainSearchActivity, "Error occured", Toast.LENGTH_LONG).show()
             }
             else{
-                regionSpinner(it)
+                if (Properties  != null){
+                    regionSpinner(it)
+                }
+
             }
         }
 
@@ -388,6 +498,8 @@ class MainSearchActivity : AppCompatActivity() {
                 Toast.makeText(this@MainSearchActivity, "Error occured", Toast.LENGTH_LONG).show()
             }
             else{
+                Properties = it
+                println("TERZA")
                 fetch_properties(it,"0","0")
             }
         }

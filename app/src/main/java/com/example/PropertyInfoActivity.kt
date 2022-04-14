@@ -71,10 +71,12 @@ class PropertyInfoActivity : AppCompatActivity() {
         }
 
         bottomNavBooking.setOnClickListener {
+            finish()
             startActivity(Intent(this, BookingActivity::class.java))
         }
 
         bottomNavMainSearch.setOnClickListener {
+            finish()
             startActivity(Intent(this, MainSearchActivity::class.java))
         }
 

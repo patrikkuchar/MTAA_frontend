@@ -399,7 +399,7 @@
                 android:id="@+id/slider_max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:value="200000"
+                android:value="1000000"
                 android:valueFrom="200000"
                 android:valueTo="1000000" />
 
@@ -418,14 +418,25 @@
                 android:layout_marginTop="30dp"
                 app:srcCompat="@drawable/houseplan_icon" />
 
-            <SeekBar
-                android:id="@+id/seekBar3"
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_min_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:value="10"
+                android:valueFrom="10"
+                android:valueTo="90" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider_max_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:value="90"
+                android:valueFrom="10"
+                android:valueTo="90" />
+
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/areaRange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="40 m - 95 m"
@@ -447,7 +458,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox1"
+                    android:id="@+id/rooms1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -455,7 +466,7 @@
                     android:text="1" />
 
                 <CheckBox
-                    android:id="@+id/checkBox4"
+                    android:id="@+id/rooms4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -468,7 +479,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/rooms2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -477,7 +488,7 @@
                     android:textSize="12sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox5"
+                    android:id="@+id/rooms5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -490,7 +501,7 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/rooms3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -499,7 +510,7 @@
                     android:textSize="12sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox6"
+                    android:id="@+id/rooms6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

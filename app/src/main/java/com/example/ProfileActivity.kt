@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.databinding.ActivityMainBinding
+import com.example.storage.SharedPrefManager
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -59,7 +60,8 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         logoutButton.setOnClickListener {
-            //vymazať manazera
+            //forget user
+            SharedPrefManager.getInstance(this).clear()
             startActivity(Intent(this, MainActivity::class.java))
         }
 

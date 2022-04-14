@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import com.example.Activity.BookingActivity
 import com.example.Activity.MainSearchActivity
 import com.example.R
 import com.example.ViewModel.BookingActivityViewModel
 import com.example.data.BookingBuyerData
+import com.example.storage.SharedPrefManager
 
 class BookingBuyerAdapter(private val context: Activity, private val dataSource: ArrayList<BookingBuyerData>) : BaseAdapter() {
     lateinit var viewModel: BookingActivityViewModel
@@ -53,6 +55,8 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
         internal var can_view_you_online: Button? = null   //Button to set and display status of CanViewYouOnline flag of the class
     }
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+
+
         val rowView = inflater.inflate(R.layout.booking_homepage, parent, false)
         this.notifyDataSetChanged()
 
@@ -69,9 +73,18 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
 
         val booking = getItem(position) as BookingBuyerData
 
-        booking_delete_button.setOnClickListener {
-            Toast.makeText(context, "Delete Button Clicked", Toast.LENGTH_SHORT).show()
-        }
+        booking_delete_button.setOnClickListener (object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                //get token
+
+                val a = context as BookingActivity
+                val token = SharedPrefManager.getInstance(context).user.token.toString()
+                a.viewModel.delete_booking(token = "Bearer " + token, booking.id)
+                Toast.makeText(context, "Delete Button Clicked", Toast.LENGTH_SHORT).show()
+                dataSource.remove(booking)
+                notifyDataSetChanged()
+            }
+        })
 
 
         val imageBytes = Base64.decode(booking.image, 0)
@@ -87,7 +100,8 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
         val time_incremented = incremented.toString() + time.substring(2)
 
 
-        booking_datetime.text = booking_datetime_string_split[0] + "  " + time + " - " + time_incremented
+        booking_datetime.text =
+            booking_datetime_string_split[0] + "  " + time + " - " + time_incremented
         rooms.text = booking.rooms.toString() + "-rooms"
         area.text = booking.area.toString() + " m2"
         price.text = modelPrice(booking.price.toString())
@@ -95,10 +109,11 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
         booking_name.text = booking.seller
 
         return rowView
+
     }
     private fun initViewModel() {
         println("SS")
-        var a = MainSearchActivity()
+        var a = BookingActivity()
         viewModel = ViewModelProvider(a).get(BookingActivityViewModel::class.java)
     }
 }

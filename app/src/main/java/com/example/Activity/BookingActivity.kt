@@ -143,5 +143,26 @@ class BookingActivity : AppCompatActivity() {
                 println("hre")
             }
         }
+
+        viewModel.response_delete.observe(this) {
+            if (it == 0) {
+
+            }
+            else {
+                if(it == 204){
+                    Toast.makeText(this, "Deleted", Toast.LENGTH_LONG).show()
+                }
+                else if (it == 401) {
+                    Toast.makeText(this, "Unauthorized", Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                }
+                else if (it ==403) {
+                    Toast.makeText(this, "Not your property", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+
+            }
+
+        }
     }
 }

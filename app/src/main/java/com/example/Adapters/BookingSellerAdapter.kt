@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.ViewModelProvider
+import com.example.Activity.BookingActivity
 import com.example.Activity.MainSearchActivity
 import com.example.R
 import com.example.ViewModel.BookingActivityViewModel
 import com.example.data.BookingSellerData
+import com.example.storage.SharedPrefManager
 
 class BookingSellerAdapter(private val context: Activity, private val dataSource: ArrayList<BookingSellerData>) : BaseAdapter() {
     lateinit var viewModel: BookingActivityViewModel
@@ -69,9 +71,19 @@ class BookingSellerAdapter(private val context: Activity, private val dataSource
 
         val booking = getItem(position) as BookingSellerData
 
-        booking_delete_button.setOnClickListener {
-            Toast.makeText(context, "Delete Button Clicked", Toast.LENGTH_SHORT).show()
-        }
+        booking_delete_button.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                val a = context as BookingActivity
+
+                val token = SharedPrefManager.getInstance(context).user.token.toString()
+                a.viewModel.delete_booking(token = "Bearer " + token, booking.id)
+                Toast.makeText(context, "Delete Button Clicked", Toast.LENGTH_SHORT).show()
+                dataSource.remove(booking)
+                notifyDataSetChanged()
+
+            }
+        })
+
 
         val imageBytes = Base64.decode(booking.image, 0)
         val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
@@ -98,9 +110,10 @@ class BookingSellerAdapter(private val context: Activity, private val dataSource
 
         return rowView
     }
+
     private fun initViewModel() {
         println("SS")
-        var a = MainSearchActivity()
+        var a = BookingActivity()
         viewModel = ViewModelProvider(a).get(BookingActivityViewModel::class.java)
     }
 }

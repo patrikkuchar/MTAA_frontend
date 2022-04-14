@@ -85,6 +85,11 @@ interface RetroService {
         @Header("Authorization") token: String)
     : Call <ChangePasswordResponse>
 
+    @DELETE("booking/{booking_id}/delete")
+    fun delete_booking(
+        @Path("booking_id") booking_id: Int,
+        @Header("Authorization") token: String)
+    : Call <String>
 
 
 }

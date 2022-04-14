@@ -48,12 +48,6 @@ class PropertyInfoActivity : AppCompatActivity() {
 
 
 
-
-
-
-
-
-
         bookingDiv.visibility = LinearLayout.GONE
 
         bookVideoCallButton.setOnClickListener {

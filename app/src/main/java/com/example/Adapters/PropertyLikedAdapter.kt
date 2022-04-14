@@ -68,7 +68,7 @@ class PropertyLikedAdapter(private val context: Activity, private val dataSource
 
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.property_homepage, parent, false)
         this.notifyDataSetChanged()
 

@@ -11,8 +11,10 @@ import retrofit2.Response
 
 class BookingActivityViewModel: ViewModel() {
     lateinit var bookings: MutableLiveData<BookingData_List>
+    lateinit var response_delete: MutableLiveData<Int>
     init {
         bookings = MutableLiveData()
+        response_delete = MutableLiveData()
     }
 
     fun get_booking(token: String){
@@ -37,4 +39,29 @@ class BookingActivityViewModel: ViewModel() {
             }
         })
     }
+
+    fun delete_booking(token: String,booking_id: Int){
+        var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
+        val call = retroInstance.delete_booking(booking_id,token)
+
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                response_delete.postValue(null)
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful) {
+                    if (response.code().toInt() == 200) {
+                        response_delete.postValue(response.code())
+                    }
+                } else
+                {
+                    response_delete.postValue(response.code())
+                    print("response_not_succesful")
+                }
+            }
+        })
+    }
+
+
 }

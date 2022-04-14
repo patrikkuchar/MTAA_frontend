@@ -40,6 +40,10 @@ interface RetroService {
         @Header("Authorization") token: String)
     :Call<Subregion_list>
 
+    @GET("booking/")
+    fun get_bookings(
+        @Header("Authorization") token: String)
+    :Call<BookingData_List>
 
     @POST("liked/")
     fun add_like(

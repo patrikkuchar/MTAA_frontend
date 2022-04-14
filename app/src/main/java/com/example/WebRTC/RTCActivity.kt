@@ -3,13 +3,20 @@ package com.example.WebRTC
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import com.example.Activity.BookingActivity
+import com.example.R
 import org.webrtc.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -46,14 +53,29 @@ class RTCActivity : AppCompatActivity() {
         }
     }
 
+
+
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.webrtc_view)
 
         if (intent.hasExtra("meetingID"))
             meetingID = intent.getStringExtra("meetingID")!!
         if (intent.hasExtra("isJoin"))
             isJoin = intent.getBooleanExtra("isJoin",false)
+
+        val switch_camera_button = findViewById<ImageView>(R.id.switch_camera_button)
+        val audio_output_button = findViewById<ImageView>(R.id.audio_output_button)
+        val video_button = findViewById<ImageView>(R.id.video_button)
+        val mic_button = findViewById<ImageView>(R.id.mic_button)
+        val end_call_button = findViewById<ImageView>(R.id.end_call_button)
+        val remote_view = findViewById<org.webrtc.SurfaceViewRenderer>(R.id.remote_view)
+        val local_view = findViewById<org.webrtc.SurfaceViewRenderer>(R.id.local_view)
+        val remote_view_loading = findViewById<ProgressBar>(R.id.remote_view_loading)
+
 
         checkCameraAndAudioPermission()
         audioManager.selectAudioDevice(RTCAudioManager.AudioDevice.SPEAKER_PHONE)
@@ -97,10 +119,11 @@ class RTCActivity : AppCompatActivity() {
             remote_view.isGone = false
             Constants.isCallEnded = true
             finish()
-            startActivity(Intent(this@RTCActivity, MainActivity::class.java))
+            startActivity(Intent(this@RTCActivity, BookingActivity::class.java))
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun checkCameraAndAudioPermission() {
         if ((ContextCompat.checkSelfPermission(this, CAMERA_PERMISSION)
                     != PackageManager.PERMISSION_GRANTED) &&
@@ -112,10 +135,15 @@ class RTCActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun onCameraAndAudioPermissionGranted() {
+
+        val remote_view = findViewById<org.webrtc.SurfaceViewRenderer>(R.id.remote_view)
+        val local_view = findViewById<org.webrtc.SurfaceViewRenderer>(R.id.local_view)
         rtcClient = RTCClient(
             application,
             object : PeerConnectionObserver() {
+                @RequiresApi(Build.VERSION_CODES.N)
                 override fun onIceCandidate(p0: IceCandidate?) {
                     super.onIceCandidate(p0)
                     signallingClient.sendIceCandidate(p0, isJoin)
@@ -167,6 +195,8 @@ class RTCActivity : AppCompatActivity() {
     }
 
     private fun createSignallingClientListener() = object : SignalingClientListener {
+        val end_call_button = findViewById<ImageView>(R.id.end_call_button)
+        val remote_view_loading = findViewById<ProgressBar>(R.id.remote_view_loading)
         override fun onConnectionEstablished() {
             end_call_button.isClickable = true
         }
@@ -188,12 +218,13 @@ class RTCActivity : AppCompatActivity() {
             rtcClient.addIceCandidate(iceCandidate)
         }
 
+        @RequiresApi(Build.VERSION_CODES.N)
         override fun onCallEnded() {
             if (!Constants.isCallEnded) {
                 Constants.isCallEnded = true
                 rtcClient.endCall(meetingID)
                 finish()
-                startActivity(Intent(this@RTCActivity, MainActivity::class.java))
+                startActivity(Intent(this@RTCActivity, BookingActivity::class.java))
             }
         }
     }
@@ -223,6 +254,7 @@ class RTCActivity : AppCompatActivity() {
             .show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_AUDIO_PERMISSION_REQUEST_CODE && grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
@@ -236,6 +268,7 @@ class RTCActivity : AppCompatActivity() {
         Toast.makeText(this, "Camera and Audio Permission Denied", Toast.LENGTH_LONG).show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
         signallingClient.destroy()
         super.onDestroy()

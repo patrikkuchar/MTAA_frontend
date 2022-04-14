@@ -58,6 +58,9 @@
         <activity android:name=".Activity.ChangePasswordActivity"
             android:theme="@style/Theme.PKCP.NoActionBar">
         </activity>
+        <activity android:name=".WebRTC.RTCActivity"
+            android:theme="@style/Theme.PKCP.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

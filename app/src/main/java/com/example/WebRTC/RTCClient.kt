@@ -2,7 +2,10 @@ package com.example.WebRTC
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.webrtc.*
 
@@ -218,6 +221,7 @@ class RTCClient(
         peerConnection?.addIceCandidate(iceCandidate)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     fun endCall(meetingID: String) {
         db.collection("calls").document(meetingID).collection("candidates")
             .get().addOnSuccessListener {

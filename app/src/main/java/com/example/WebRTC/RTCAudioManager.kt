@@ -1,5 +1,6 @@
 package com.example.WebRTC
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,8 @@ import android.os.Build
 import android.preference.PreferenceManager
 import android.util.Log
 import androidx.annotation.Nullable
+import com.example.R
+import org.webrtc.ThreadUtils
 import java.util.*
 import kotlin.collections.HashSet
 
@@ -125,7 +128,7 @@ class RTCAudioManager(context: Context) {
 
         // Create an AudioManager.OnAudioFocusChangeListener instance.
         audioFocusChangeListener =
-            OnAudioFocusChangeListener { focusChange ->
+            AudioManager.OnAudioFocusChangeListener { focusChange ->
 
                 // Called on the listener to notify if the audio focus for this listener has been changed.
                 // The |focusChange| value indicates whether the focus was gained, whether the focus was lost,
@@ -186,6 +189,7 @@ class RTCAudioManager(context: Context) {
         Log.d(TAG, "AudioManager started")
     }
 
+    @SuppressLint("WrongConstant")
     fun stop() {
         Log.d(TAG, "stop")
         ThreadUtils.checkIsOnMainThread()

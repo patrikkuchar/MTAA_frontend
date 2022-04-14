@@ -19,10 +19,9 @@ import com.example.ViewModel.MainSearchActivityViewModel
 import com.example.data.Prop
 
 
-class PropertyAdapter(private val context: Activity, private val dataSource: ArrayList<Prop>) :
+class PropertyLikedAdapter(private val context: Activity, private val dataSource: ArrayList<Prop>) :
     BaseAdapter() {
-    lateinit var viewModel: MainSearchActivityViewModel
-    lateinit var viewmodel2 : LikedPropertiesActivityViewModel
+    lateinit var viewModel: LikedPropertiesActivityViewModel
 
     private val inflater: LayoutInflater
             = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -99,31 +98,14 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
                 val propertyaa = getItem(position) as Prop
                 println("Clicked")
                 println(propertyaa.id)
-                if (propertyaa.liked == null){
-                    propertyaa.liked = true
 
-                    val a = context as MainSearchActivity
-                    val id = propertyaa.id.toInt()
-                    a.viewModel.likedProperties(id,context)
-                    liked_button.setImageResource(R.drawable.fullhearth_icon)
-                }
-                else{
-                    if(propertyaa.liked == true){
-                        propertyaa.liked = false
-                        val a = context as MainSearchActivity
-                        val id = propertyaa.id.toInt()
-                        a.viewModel.unlikedProperties(id,context)
-                        liked_button.setImageResource(R.drawable.hearth_icon)
-                    }
-                    else{
-                        propertyaa.liked = true
-                        val a = context as MainSearchActivity
-                        val id = propertyaa.id.toInt()
-                        a.viewModel.likedProperties(id,context)
-                        liked_button.setImageResource(R.drawable.fullhearth_icon)
-                    }
-                }
-
+                propertyaa.liked = false
+                val a = context as LikedPropertiesActivity
+                val id = propertyaa.id.toInt()
+                a.viewModel.unlikedProperties(id,context)
+                dataSource.remove(propertyaa)
+                //refresh page
+                notifyDataSetChanged()
 
 
                 /*if (property.liked == "true") {
@@ -146,14 +128,8 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
         addressTextView.text = property.address
         areaTextView.text = property.area.toString() + " m2"
         roomsTextView.text = property.rooms.toString() + "-rooms"
+        liked_button.setImageResource(R.drawable.fullhearth_icon)
 
-        property.liked?.let {
-            if (it == true) {
-                liked_button.setImageResource(R.drawable.fullhearth_icon)
-            } else {
-                liked_button.setImageResource(R.drawable.hearth_icon)
-            }
-        }
 
         return rowView
     }
@@ -162,7 +138,7 @@ class PropertyAdapter(private val context: Activity, private val dataSource: Arr
 
         println("SS")
         var a = MainSearchActivity()
-        viewModel = ViewModelProvider(a).get(MainSearchActivityViewModel::class.java)
+        viewModel = ViewModelProvider(a).get(LikedPropertiesActivityViewModel::class.java)
 
 
 

@@ -1,6 +1,8 @@
 package com.example.WebRTC
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import kotlinx.coroutines.*
@@ -8,7 +10,9 @@ import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import org.json.JSONObject
 import org.webrtc.IceCandidate
 import org.webrtc.SessionDescription
+import com.google.firebase.firestore.ktx.firestore
 
+@RequiresApi(Build.VERSION_CODES.N)
 class SignalingClient(
     private val meetingID : String,
     private val listener: SignalingClientListener
@@ -45,6 +49,7 @@ class SignalingClient(
         connect()
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun connect() = launch {
         db.enableNetwork().addOnSuccessListener {
             listener.onConnectionEstablished()

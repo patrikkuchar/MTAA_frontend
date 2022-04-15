@@ -2,8 +2,10 @@ package com.example.Activity
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +54,9 @@ class PropertyInfoActivity : AppCompatActivity() {
 
         initViewModel()
         fetch_property()
+
+
+
 
 
         bookingDiv.visibility = LinearLayout.GONE
@@ -143,6 +148,14 @@ class PropertyInfoActivity : AppCompatActivity() {
         val propertyInfoAddress = findViewById<TextView>(R.id.propertyInfoAddress)
         val propertyInfoOwner = findViewById<TextView>(R.id.propertyInfoOwner)
         val propertyInfoImg = findViewById<ImageView>(R.id.propertyInfoImg)
+
+        var urlka = "http://maps.google.com/maps?q=loc:"+property.address
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlka))
+
+        propertyInfoImg.setOnClickListener(View.OnClickListener {
+            startActivity(intent, null)
+        })
+
         val propertyInfoInfo = findViewById<TextView>(R.id.propertyInfoInfo)
 
         propertyInfoRooms.text = property.rooms.toString()

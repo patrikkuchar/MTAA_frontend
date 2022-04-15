@@ -70,7 +70,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextNumberDecimal"
+                        android:id="@+id/sell_rooms"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -88,7 +88,7 @@
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal"
+                        app:layout_constraintStart_toEndOf="@+id/sell_rooms"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/rooms_icon" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -106,7 +106,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextNumberDecimal3"
+                        android:id="@+id/sell_area"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -124,7 +124,7 @@
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal3"
+                        app:layout_constraintStart_toEndOf="@+id/sell_area"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/houseplan_icon" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,7 +142,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/editTextNumberDecimal2"
+                        android:id="@+id/sell_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -160,7 +160,7 @@
                         android:layout_height="27dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/editTextNumberDecimal2"
+                        app:layout_constraintStart_toEndOf="@+id/sell_price"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/euro_icon" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -183,12 +183,12 @@
                         android:layout_height="29dp"
                         android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/editTextTextPostalAddress"
+                        app:layout_constraintStart_toEndOf="@+id/sell_address"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/address_icon" />
 
                     <EditText
-                        android:id="@+id/editTextTextPostalAddress"
+                        android:id="@+id/sell_address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -203,7 +203,49 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/sell_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Region"
+                android:textColor="#222222"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/Sell_region_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Subregion"
+                android:textColor="#222222"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/Sell_subregion_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -214,7 +256,7 @@
                 android:inputType="textMultiLine" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/addImagesButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -225,14 +267,14 @@
                 android:textAlignment="center" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/uploaded_images_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0 uploaded (min 3)"
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/SELL_porperty_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"

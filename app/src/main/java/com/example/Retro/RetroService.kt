@@ -91,5 +91,10 @@ interface RetroService {
         @Header("Authorization") token: String)
     : Call <String>
 
+    @POST("property/")
+    fun add_property(
+        @Body params: SellPropertyRequest,
+        @Header("Authorization") token: String)
+    : Call <String>
 
 }

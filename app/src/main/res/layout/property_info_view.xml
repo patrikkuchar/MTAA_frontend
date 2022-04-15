@@ -213,6 +213,7 @@
                                 android:id="@+id/propertyInfoImg"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
+                                android:clickable="true"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHeight_percent="0.60"
                                 app:layout_constraintStart_toStartOf="parent"

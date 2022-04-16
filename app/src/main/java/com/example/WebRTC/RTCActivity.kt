@@ -224,7 +224,9 @@ class RTCActivity : AppCompatActivity() {
                 Constants.isCallEnded = true
                 rtcClient.endCall(meetingID)
                 finish()
-                startActivity(Intent(this@RTCActivity, BookingActivity::class.java))
+                intent = Intent(this@RTCActivity, BookingActivity::class.java)
+                intent.putExtra("meetingID", meetingID)
+                startActivity(intent)
             }
         }
     }

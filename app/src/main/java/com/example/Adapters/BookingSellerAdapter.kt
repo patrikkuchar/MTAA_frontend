@@ -92,8 +92,9 @@ class BookingSellerAdapter(private val context: Activity, private val dataSource
         booking_videocall_button.setOnClickListener {
             val intent = Intent(context, RTCActivity::class.java)
             intent.putExtra("meetingID", booking.id.toString())
-            intent.putExtra("isJoin", false)
+            intent.putExtra("isJoin", true)
             ContextCompat.startActivity(context, intent, null)
+            println("Video Call Button Clicked")
         }
 
         val imageBytes = Base64.decode(booking.image, 0)

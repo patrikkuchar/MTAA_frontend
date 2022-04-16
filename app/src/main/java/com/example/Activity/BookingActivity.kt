@@ -30,6 +30,15 @@ class BookingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.booking_view)
+        var call_ended_meeting_id = ""
+
+        if (intent.hasExtra("meetingID")) {
+            call_ended_meeting_id = intent.getStringExtra("meetingID")!!
+            val token = SharedPrefManager.getInstance(this).user.token.toString()
+            viewModel.delete_booking(token="Bearer "+token, booking_id=call_ended_meeting_id.toInt())
+        }
+
+
 
         val bottomNavProfile = findViewById<ImageView>(R.id.bottomNavProfile)
         val bottomNavMainSearch = findViewById<ImageView>(R.id.bottomNavMainSearch)

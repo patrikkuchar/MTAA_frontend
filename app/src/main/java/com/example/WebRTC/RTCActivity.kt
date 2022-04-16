@@ -34,7 +34,7 @@ class RTCActivity : AppCompatActivity() {
 
     private val audioManager by lazy { RTCAudioManager.create(this) }
 
-    val TAG = "MainActivity"
+    val TAG = "BookingActivity"
 
     private var meetingID : String = "test-call"
 

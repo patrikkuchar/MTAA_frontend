@@ -91,8 +91,8 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
 
         booking_videocall_button.setOnClickListener {
             val intent = Intent(context, RTCActivity::class.java)
-            intent.putExtra("meeting_id", booking.id)
-            intent.putExtra("isJoin", true)
+            intent.putExtra("meetingID", booking.id.toString())
+            intent.putExtra("isJoin", false)
             startActivity(context, intent, null)
         }
 

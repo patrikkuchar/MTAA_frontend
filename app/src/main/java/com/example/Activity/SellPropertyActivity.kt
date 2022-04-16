@@ -131,7 +131,7 @@ class SellPropertyActivity : AppCompatActivity() {
                 val address = findViewById<TextView>(R.id.sell_address).text.toString()
                 val description = findViewById<TextView>(R.id.sell_description).text.toString()
 
-                val propertyRequest = SellPropertyRequest(rooms.toInt(), area.toInt(), price.toInt(),Subregion_id, address, description,0, Imagelist)
+                val propertyRequest = SellPropertyRequest(rooms.toInt(), area.toInt(), price.toInt(),Subregion_id, address, description,1, Imagelist)
                 val token = SharedPrefManager.getInstance(this).user.token.toString()
                 viewModel.sell_property(token="Bearer "+token,propertyRequest)
 
@@ -300,7 +300,7 @@ class SellPropertyActivity : AppCompatActivity() {
             } else {
                 if (it.toInt() == 201) {
                     Toast.makeText(this@SellPropertyActivity, "Success", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this@SellPropertyActivity, MainActivity::class.java)
+                    val intent = Intent(this@SellPropertyActivity, MainSearchActivity::class.java)
                     startActivity(intent)
                 } else {
                     println("Error: " + it)

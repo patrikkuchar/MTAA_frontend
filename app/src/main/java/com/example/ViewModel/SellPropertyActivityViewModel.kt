@@ -28,6 +28,7 @@ class SellPropertyActivityViewModel: ViewModel() {
             override fun onFailure(call: Call<String>, t: Throwable) {
 
                 response_code.postValue(null)
+                //DOKONČIŤ :D
             }
 
             override fun onResponse(call: Call<String>, response: Response<String>) {

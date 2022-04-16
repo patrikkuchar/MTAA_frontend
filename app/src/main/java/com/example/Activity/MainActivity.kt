@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 val user = User((it.id)!!.toInt(),it.email,it.name,it.surname,it.token)
                 SharedPrefManager.getInstance(applicationContext).saveUser(user)
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, SellPropertyActivity::class.java))
+                startActivity(Intent(this, BookingActivity::class.java))
 
             }
         })

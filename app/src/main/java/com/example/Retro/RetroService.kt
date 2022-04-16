@@ -97,4 +97,16 @@ interface RetroService {
         @Header("Authorization") token: String)
     : Call <String>
 
+
+    @DELETE("property/{property_id}/delete")
+    fun delete_property(
+        @Path("property_id") property_id: Int,
+        @Header("Authorization") token: String)
+    : Call <String>
+
+    @GET("property/user")
+    fun get_user_property(
+        @Header("Authorization") token: String)
+    : Call <UserProperties>
+
 }

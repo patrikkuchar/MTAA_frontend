@@ -4,11 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.Activity.BookingActivity
@@ -18,6 +20,8 @@ import com.example.ViewModel.BookingActivityViewModel
 import com.example.WebRTC.RTCActivity
 import com.example.data.BookingBuyerData
 import com.example.storage.SharedPrefManager
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class BookingBuyerAdapter(private val context: Activity, private val dataSource: ArrayList<BookingBuyerData>) : BaseAdapter() {
     lateinit var viewModel: BookingActivityViewModel
@@ -57,6 +61,26 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
         internal var subtitle: TextView? = null  //Display Description
         internal var can_view_you_online: Button? = null   //Button to set and display status of CanViewYouOnline flag of the class
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun checkTime(time: String) : Boolean {
+        val currentTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val current = currentTime.format(formatter)
+
+        val bookingDate = time.substring(0, 10)
+        val nowDate = current.substring(0, 10)
+
+        val bookingTime = time.substring(11, 13).toInt() + time.substring(14, 16).toInt() / 60
+        val nowTime = current.substring(11, 13).toInt() + current.substring(14, 16).toInt() / 60
+
+        if (bookingDate == nowDate && nowTime >= bookingTime && nowTime <= bookingTime + 1) {
+            return true
+        }
+        return false
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
 
@@ -90,10 +114,15 @@ class BookingBuyerAdapter(private val context: Activity, private val dataSource:
         })
 
         booking_videocall_button.setOnClickListener {
-            val intent = Intent(context, RTCActivity::class.java)
-            intent.putExtra("meetingID", booking.id.toString())
-            intent.putExtra("isJoin", false)
-            startActivity(context, intent, null)
+            if (checkTime(booking.date)) {
+                val intent = Intent(context, RTCActivity::class.java)
+                intent.putExtra("meetingID", booking.id.toString())
+                intent.putExtra("isJoin", true)
+                startActivity(context, intent, null)
+            }
+            else {
+                Toast.makeText(context, "You can only call within 1 hour of booking time", Toast.LENGTH_SHORT).show()
+            }
         }
 
 

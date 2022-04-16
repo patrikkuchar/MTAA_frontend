@@ -36,7 +36,7 @@ class RTCActivity : AppCompatActivity() {
 
     val TAG = "BookingActivity"
 
-    private var meetingID : String = "test-call"
+    private var meetingID : String = "testovaci-hovor"
 
     private var isJoin = false
 

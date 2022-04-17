@@ -1,7 +1,7 @@
 package com.example.data
 
 data class UserProperty(
-    val id: Number,
+    val id: Int,
     val rooms: Number,
     val area: Number,
     val price: Number,

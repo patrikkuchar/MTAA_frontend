@@ -38,7 +38,7 @@ class ProfileActivity : AppCompatActivity() {
 
         fetchUserProperties()
 
-        var adapter1 = ProfileAdapter(this, properties as ArrayList<UserProperty>)
+
 
         val deletePropertyButton = findViewById<Button>(R.id.deletePropertyButton)
         var deletePropertyDiv = findViewById<LinearLayout>(R.id.deletePropertyDiv)
@@ -74,9 +74,7 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this, SellPropertyActivity::class.java))
         }
 
-        editPropertyButton.setOnClickListener {
-            startActivity(Intent(this, SellPropertyActivity::class.java))
-        }
+
 
         logoutButton.setOnClickListener {
             //forget user
@@ -86,9 +84,7 @@ class ProfileActivity : AppCompatActivity() {
 
         deletePropertyDiv.visibility = LinearLayout.GONE
 
-        deletePropertyButton.setOnClickListener {
-            deletePropertyDiv.visibility = LinearLayout.VISIBLE
-        }
+
 
         profileDecisionYesButton.setOnClickListener {
             deletePropertyDiv.visibility = LinearLayout.GONE
@@ -105,7 +101,7 @@ class ProfileActivity : AppCompatActivity() {
         viewModel.getUserProperties(token="Bearer "+token)
     }
 
-    private fun onAddField(view: View, properties: UserProperties) {
+    private fun onAddField(view: View, properties: List<UserProperty>) {
 
         var adapter1 = ProfileAdapter(this, properties as ArrayList<UserProperty>)
 
@@ -168,13 +164,10 @@ class ProfileActivity : AppCompatActivity() {
 
         viewModel.properties.observe(this) {
             if (it == null) {
-
-                Toast.makeText(this, "Not Found", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "0 Propertes found", Toast.LENGTH_LONG).show()
             } else {
-                var View = findViewById<ConstraintLayout>(R.id.booking_root)
-                properties = it
-                onAddField(View, properties!!)
-                println("hre")
+                var View = findViewById<ConstraintLayout>(R.id.profile_view)
+                onAddField(View, it.properties)
             }
         }
 

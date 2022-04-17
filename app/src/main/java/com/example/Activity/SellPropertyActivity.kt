@@ -33,10 +33,13 @@ class SellPropertyActivity : AppCompatActivity() {
     lateinit var viewModel: SellPropertyActivityViewModel
     private var Region_id: Int = 0
     private var Subregion_id: Int = 0
+    private var Property: PropertyInfoData? = null
+    private var Property_Images : List<String> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.sell_property_view)
+
 
         val profileButton = findViewById<ImageView>(R.id.bottomNavProfile)
         val bottomNavBooking = findViewById<ImageView>(R.id.bottomNavBooking)
@@ -49,14 +52,67 @@ class SellPropertyActivity : AppCompatActivity() {
         val subregionSpinner = findViewById<Spinner>(R.id.Sell_subregion_spinner)
 
 
+        initViewModel()
+
+        val edit_property = intent.getIntExtra("editProperty", 0)
+        val property_id = intent.getIntExtra("propertyId", 0)
+
+        if (edit_property == 1) {
+            val token = SharedPrefManager.getInstance(this).user.token.toString()
+            viewModel.get_property(token = "Bearer " + token, property_id)
+
+            sellPropertyButton.setText("Edit Property")
+
+            sellPropertyButton.setOnClickListener{ view ->
+                println("here1")
+                val rooms = findViewById<TextView>(R.id.sell_rooms).text.toString()
+                val area = findViewById<TextView>(R.id.sell_area).text.toString()
+                val price = findViewById<TextView>(R.id.sell_price).text.toString()
+                val address = findViewById<TextView>(R.id.sell_address).text.toString()
+                val description = findViewById<TextView>(R.id.sell_description).text.toString()
+                var request = EditPropertyRequest(rooms.toInt(), area.toInt(), price.toInt(),Subregion_id, address, description)
+                viewModel.edit_property(token = "Bearer " + token,request,property_id)
+
+                val request2 = EditImagesRequest(0,Property_Images)
+
+                viewModel.edit_photos(token = "Bearer " + token,request2,property_id)
+            }
+        }
+        else{
+            fetch_regions()
+
+            sellPropertyButton.setOnClickListener { view ->
+                println("here2")
+                if (Imagelist.size < 3){
+                    Toast.makeText(this, "Minimum 3 pictures", Toast.LENGTH_SHORT).show()
+                    Imagelist.clear()
+                }
+                else{
+                    val rooms = findViewById<TextView>(R.id.sell_rooms).text.toString()
+                    val area = findViewById<TextView>(R.id.sell_area).text.toString()
+                    val price = findViewById<TextView>(R.id.sell_price).text.toString()
+                    val address = findViewById<TextView>(R.id.sell_address).text.toString()
+                    val description = findViewById<TextView>(R.id.sell_description).text.toString()
+
+                    val propertyRequest = SellPropertyRequest(rooms.toInt(), area.toInt(), price.toInt(),Subregion_id, address, description,1, Imagelist)
+                    val token = SharedPrefManager.getInstance(this).user.token.toString()
+                    viewModel.sell_property(token="Bearer "+token,propertyRequest)
+
+                }
+            }
+
+        }
+
+
+
         var context: Context? = null
         var PICK_IMAGE_MULTIPLE = 1
         lateinit var imagePath: String
         var imagesPathList: MutableList<String> = arrayListOf()
 
-        initViewModel()
 
-        fetch_regions()
+
+
 
 
         var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -116,31 +172,7 @@ class SellPropertyActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
             var pocet = Imagelist.size
             println(pocet)
-
         }
-
-        sellPropertyButton.setOnClickListener { view ->
-            if (Imagelist.size < 3){
-                Toast.makeText(this, "Minimum 3 pictures", Toast.LENGTH_SHORT).show()
-                Imagelist.clear()
-            }
-            else{
-                val rooms = findViewById<TextView>(R.id.sell_rooms).text.toString()
-                val area = findViewById<TextView>(R.id.sell_area).text.toString()
-                val price = findViewById<TextView>(R.id.sell_price).text.toString()
-                val address = findViewById<TextView>(R.id.sell_address).text.toString()
-                val description = findViewById<TextView>(R.id.sell_description).text.toString()
-
-                val propertyRequest = SellPropertyRequest(rooms.toInt(), area.toInt(), price.toInt(),Subregion_id, address, description,1, Imagelist)
-                val token = SharedPrefManager.getInstance(this).user.token.toString()
-                viewModel.sell_property(token="Bearer "+token,propertyRequest)
-
-            }
-        }
-
-
-
-
 
 
         profileButton.setOnClickListener {
@@ -193,10 +225,16 @@ class SellPropertyActivity : AppCompatActivity() {
         var i = 0
         for (one in array){
             one.name?.let { regionList.add(it) }
+            if (one.name == Property?.region){
+                Region_id = one.id.toInt()
+
+            }
         }
         val regionAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,regionList)
         regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         regionSpinner.adapter = regionAdapter
+        regionSpinner.setSelection(Region_id)
+
 
         regionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -245,6 +283,10 @@ class SellPropertyActivity : AppCompatActivity() {
         var i = 0
         for (one in array){
             one.name?.let { subregionList.add(it) }
+            if (one.name == Property?.subregion){
+                Subregion_id = one.id.toInt()
+                subregionSpinner.setSelection(Subregion_id)
+            }
         }
 
         if (subregions.subregions.size == 0){
@@ -255,6 +297,8 @@ class SellPropertyActivity : AppCompatActivity() {
         val subregionAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,subregionList)
         subregionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         subregionSpinner.adapter = subregionAdapter
+
+        subregionSpinner.setSelection(Subregion_id)
         //on click listener
         subregionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
@@ -328,6 +372,37 @@ class SellPropertyActivity : AppCompatActivity() {
             else{
                 println("HERE I AM :D")
                 subregionSpinner(it)
+            }
+        }
+
+        viewModel.property.observe(this){
+            if (it == null){
+                Toast.makeText(this@SellPropertyActivity, "Error occured", Toast.LENGTH_LONG).show()
+            }
+            else{
+                val rooms = findViewById<TextView>(R.id.sell_rooms)
+                val area = findViewById<TextView>(R.id.sell_area)
+                val price = findViewById<TextView>(R.id.sell_price)
+                val address = findViewById<TextView>(R.id.sell_address)
+                val description = findViewById<TextView>(R.id.sell_description)
+                val image_text = findViewById<TextView>(R.id.uploaded_images_text)
+                val regionSpinner = findViewById<Spinner>(R.id.Sell_region_spinner)
+                val subregionSpinner = findViewById<Spinner>(R.id.Sell_subregion_spinner)
+
+                Property = it.property
+
+                rooms.setText(it.property.rooms.toString())
+                area.setText(it.property.area.toString())
+                price.setText(it.property.price.toString())
+                address.setText(it.property.address)
+                description.setText(it.property.info)
+                var images = it.property.images
+                Property_Images = it.property.images
+                image_text.setText(images.size.toString() + " images uploaded")
+
+                fetch_regions()
+
+
             }
         }
     }

@@ -45,13 +45,16 @@ class ProfileActivityViewModel: ViewModel() {
         call.enqueue(object: Callback<UserProperties> {
             override fun onFailure(call: Call<UserProperties>, t: Throwable) {
                 println("fail1")
+                properties.postValue(null)
             }
             override fun onResponse(call: Call<UserProperties>, response: Response<UserProperties>) {
                 if(response.isSuccessful) {
+                    properties.postValue(response.body())
                     println("success")
                 }
 
                 else {
+                    properties.postValue(null)
                     println("fail2")
                 }
 

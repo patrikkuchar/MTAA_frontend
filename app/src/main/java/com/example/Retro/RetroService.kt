@@ -109,4 +109,17 @@ interface RetroService {
         @Header("Authorization") token: String)
     : Call <UserProperties>
 
+    @PUT("property/{property_id}/edit")
+    fun edit_property(
+        @Path("property_id") property_id: Int,
+        @Body params: EditPropertyRequest,
+        @Header("Authorization") token: String)
+    : Call <String>
+
+    @POST("images/{property_id}/")
+    fun edit_images(
+        @Path("property_id") property_id: Int,
+        @Body params: EditImagesRequest,
+        @Header("Authorization") token: String)
+    : Call <String>
 }

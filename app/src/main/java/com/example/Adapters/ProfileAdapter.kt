@@ -1,8 +1,8 @@
 package com.example.Adapters
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.Activity.MainSearchActivity
 import com.example.Activity.ProfileActivity
+import com.example.Activity.SellPropertyActivity
 import com.example.R
 import com.example.ViewModel.ProfileActivityViewModel
 import com.example.WebRTC.RTCActivity
@@ -22,6 +24,7 @@ import com.example.storage.SharedPrefManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class ProfileAdapter(private val context: Activity, private val dataSource: ArrayList<UserProperty>) : BaseAdapter() {
+
     lateinit var viewModel: ProfileActivityViewModel
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     override fun getCount(): Int {
@@ -61,26 +64,25 @@ class ProfileAdapter(private val context: Activity, private val dataSource: Arra
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val rowView = inflater.inflate(R.layout.booking_homepage, parent, false)
+        val rowView = inflater.inflate(R.layout.profile_homepage, parent, false)
         this.notifyDataSetChanged()
 
-        val booking_datetime = rowView.findViewById<TextView>(R.id.booking_datetime)
-        val prop_image = rowView.findViewById<ImageView>(R.id.prop_image)
-        val rooms = rowView.findViewById<TextView>(R.id.rooms)
-        val area = rowView.findViewById<TextView>(R.id.area)
-        val price = rowView.findViewById<TextView>(R.id.price)
-        val address = rowView.findViewById<TextView>(R.id.address)
-        val booking_name = rowView.findViewById<TextView>(R.id.booking_name)
-        val booking_videocall_button = rowView.findViewById<Button>(R.id.booking_videocall_button)
-        val booking_delete_button = rowView.findViewById<Button>(R.id.booking_delete_button)
+
+        val prop_image = rowView.findViewById<ImageView>(R.id.profile_image_view)
+        val rooms = rowView.findViewById<TextView>(R.id.profile_rooms_text)
+        val area = rowView.findViewById<TextView>(R.id.profile_area_text)
+        val price = rowView.findViewById<TextView>(R.id.profile_price_text)
+        val address = rowView.findViewById<TextView>(R.id.profile_address_text)
+        val EditButton = rowView.findViewById<Button>(R.id.editPropertyButton)
+        val DeleteButton = rowView.findViewById<Button>(R.id.deletePropertyButton)
+        val create_at = rowView.findViewById<TextView>(R.id.profile_create_at_text)
 
 
-        val property = getItem(position) as BookingSellerData
+        val property = getItem(position) as UserProperty
 
-        booking_delete_button.setOnClickListener(object : View.OnClickListener {
+        DeleteButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val a = context as ProfileActivity
-
                 val token = SharedPrefManager.getInstance(context).user.token.toString()
                 a.viewModel.delete_property(token = "Bearer " + token, property.id)
                 Toast.makeText(context, "Delete Button Clicked", Toast.LENGTH_SHORT).show()
@@ -90,14 +92,20 @@ class ProfileAdapter(private val context: Activity, private val dataSource: Arra
             }
         })
 
+        EditButton.setOnClickListener {
+            val intent = Intent(context, SellPropertyActivity::class.java)
+            intent.putExtra("editProperty", 1)
+            intent.putExtra("propertyId", property.id)
+            startActivity(context,intent,null)
 
+        }
 
         val imageBytes = Base64.decode(property.image, 0)
         val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
         prop_image.setImageBitmap(image)
 
         //spilt date by "T"
-        val booking_datetime_string_split = property.date.split("T")
+        val booking_datetime_string_split = property.last_updated.split("T")
         //get first part of date
         val time = booking_datetime_string_split[1].substring(0, 5)
         //increment time by 1 hour
@@ -105,15 +113,11 @@ class ProfileAdapter(private val context: Activity, private val dataSource: Arra
         val time_incremented = incremented.toString() + time.substring(2)
 
 
-        booking_datetime.text = booking_datetime_string_split[0] + "  " + time + " - " + time_incremented
+        create_at.text = property.last_updated.substring(0, 10) + " " + time_incremented
         rooms.text = property.rooms.toString() + "-rooms"
         area.text = property.area.toString() + " m2"
         price.text = modelPrice(property.price.toString())
         address.text = property.address
-        booking_name.text = property.buyer
-
-
-
 
         return rowView
     }

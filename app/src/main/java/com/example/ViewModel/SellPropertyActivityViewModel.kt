@@ -13,10 +13,16 @@ class SellPropertyActivityViewModel: ViewModel() {
     lateinit var response_code: MutableLiveData<String>
     lateinit var regions: MutableLiveData<Region_List>
     lateinit var subregions:MutableLiveData<Subregion_list>
+    lateinit var property: MutableLiveData<PropertyInfoDataOne>
+    lateinit var editproperty_code : MutableLiveData<String>
+    lateinit var editImages_code : MutableLiveData<String>
     init {
         response_code = MutableLiveData()
         regions = MutableLiveData()
         subregions = MutableLiveData()
+        property = MutableLiveData()
+        editproperty_code = MutableLiveData()
+        editImages_code = MutableLiveData()
     }
 
 
@@ -41,6 +47,71 @@ class SellPropertyActivityViewModel: ViewModel() {
             }
         })
     }
+
+    fun edit_photos(token: String,ImageRequest: EditImagesRequest,property_id: Int){
+        var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
+        val call = retroInstance.edit_images(property_id,ImageRequest,token)
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                editImages_code.postValue(null)
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful) {
+                    editImages_code.postValue(response.code().toString())
+                } else {
+                    editImages_code.postValue(response.code().toString())
+
+                }
+            }
+        })
+    }
+
+
+
+
+
+
+    fun edit_property(token: String,PropertyRequest: EditPropertyRequest,property_id : Int){
+        var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
+        val call = retroInstance.edit_property(property_id,PropertyRequest,token)
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                editproperty_code.postValue(null)
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful) {
+                    editproperty_code.postValue(response.code().toString())
+                } else {
+                    editproperty_code.postValue(response.code().toString())
+
+                }
+            }
+        })
+    }
+
+
+    fun get_property(token: String,id: Int){
+        var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)
+        val call = retroInstance.get_property(id,token)
+        call.enqueue(object: Callback<PropertyInfoDataOne> {
+            override fun onFailure(call: Call<PropertyInfoDataOne>, t: Throwable) {
+                property.postValue(null)
+                //DOKONČIŤ :D
+            }
+
+            override fun onResponse(call: Call<PropertyInfoDataOne>, response: Response<PropertyInfoDataOne>) {
+                if(response.isSuccessful) {
+                    property.postValue(response.body())
+                } else {
+                    property.postValue(null)
+
+                }
+            }
+        })
+    }
+
 
     fun get_regions(token:String){
         var retroInstance = RetroInstance.getRetroInstance().create(RetroService::class.java)

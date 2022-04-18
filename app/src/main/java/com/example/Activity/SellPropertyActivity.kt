@@ -51,6 +51,11 @@ class SellPropertyActivity : AppCompatActivity() {
         val regionSpinner = findViewById<Spinner>(R.id.Sell_region_spinner)
         val subregionSpinner = findViewById<Spinner>(R.id.Sell_subregion_spinner)
 
+        val sellPropertyLoggedUser = findViewById<TextView>(R.id.sellPropertyLoggedUser)
+
+        val user = SharedPrefManager.getInstance(this).user
+        sellPropertyLoggedUser.setText("logged as " + user.name + " " + user.surname)
+
 
         initViewModel()
 

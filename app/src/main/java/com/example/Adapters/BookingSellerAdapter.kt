@@ -116,7 +116,7 @@ class BookingSellerAdapter(private val context: Activity, private val dataSource
             if (checkTime(booking.date)) {
                 val intent = Intent(context, RTCActivity::class.java)
                 intent.putExtra("meetingID", booking.id.toString())
-                intent.putExtra("isJoin", true)
+                intent.putExtra("isJoin", false)
                 ContextCompat.startActivity(context, intent, null)
             }
             else {

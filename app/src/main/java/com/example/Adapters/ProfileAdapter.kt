@@ -86,7 +86,7 @@ class ProfileAdapter(private val context: Activity, private val dataSource: Arra
                 val token = SharedPrefManager.getInstance(context).user.token.toString()
                 a.viewModel.delete_property(token = "Bearer " + token, property.id)
                 Toast.makeText(context, "Delete Button Clicked", Toast.LENGTH_SHORT).show()
-             //   dataSource.remove(property)
+                dataSource.remove(property)
                 notifyDataSetChanged()
 
             }

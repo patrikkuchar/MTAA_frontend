@@ -69,7 +69,6 @@ class SellPropertyActivity : AppCompatActivity() {
             sellPropertyButton.setText("Edit Property")
 
             sellPropertyButton.setOnClickListener{ view ->
-                println("here1")
                 val rooms = findViewById<TextView>(R.id.sell_rooms).text.toString()
                 val area = findViewById<TextView>(R.id.sell_area).text.toString()
                 val price = findViewById<TextView>(R.id.sell_price).text.toString()
@@ -81,6 +80,7 @@ class SellPropertyActivity : AppCompatActivity() {
                 val request2 = EditImagesRequest(0,Property_Images)
 
                 viewModel.edit_photos(token = "Bearer " + token,request2,property_id)
+
             }
         }
         else{
@@ -347,12 +347,11 @@ class SellPropertyActivity : AppCompatActivity() {
             if (it == null) {
                 Toast.makeText(this@SellPropertyActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
-                if (it.toInt() == 201) {
+                if (it.toInt() == 204) {
                     Toast.makeText(this@SellPropertyActivity, "Success", Toast.LENGTH_LONG).show()
                     val intent = Intent(this@SellPropertyActivity, MainSearchActivity::class.java)
                     startActivity(intent)
                 } else {
-                    println("Error: " + it)
                     Toast.makeText(this@SellPropertyActivity, "Erorr occured", Toast.LENGTH_LONG).show()
                 }
             }
@@ -408,6 +407,37 @@ class SellPropertyActivity : AppCompatActivity() {
                 fetch_regions()
 
 
+            }
+        }
+
+        viewModel.editImages_code.observe(this){
+            if (it == null){
+                Toast.makeText(this@SellPropertyActivity, "Error occured", Toast.LENGTH_LONG).show()
+            }
+            else{
+                if (it.toInt() == 201){
+                    Toast.makeText(this@SellPropertyActivity, "Images edited succesfully", Toast.LENGTH_LONG).show()
+
+                }
+                else{
+                    Toast.makeText(this@SellPropertyActivity, "Erorr occured", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        viewModel.editproperty_code.observe(this){
+            if (it == null){
+                Toast.makeText(this@SellPropertyActivity, "Error occured", Toast.LENGTH_LONG).show()
+            }
+            else{
+                if (it.toInt() == 200){
+                    Toast.makeText(this@SellPropertyActivity, "Property edited succesfully", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@SellPropertyActivity, MainSearchActivity::class.java)
+                    startActivity(intent)
+                }
+                else{
+                    Toast.makeText(this@SellPropertyActivity, "Erorr occured", Toast.LENGTH_LONG).show()
+                }
             }
         }
     }

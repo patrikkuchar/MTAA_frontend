@@ -70,7 +70,7 @@
                             app:srcCompat="@drawable/avatar_icon" />
 
                         <TextView
-                            android:id="@+id/textView22"
+                            android:id="@+id/profileName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
@@ -103,7 +103,7 @@
                             app:srcCompat="@drawable/email_icon" />
 
                         <TextView
-                            android:id="@+id/textView26"
+                            android:id="@+id/profileEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"

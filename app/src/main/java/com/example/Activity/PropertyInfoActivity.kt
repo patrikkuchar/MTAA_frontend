@@ -2,12 +2,15 @@ package com.example.Activity
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.R
@@ -15,6 +18,7 @@ import com.example.ViewModel.PropertyInfoViewModel
 import com.example.data.PropertyInfoData
 import com.example.databinding.ActivityMainBinding
 import com.example.storage.SharedPrefManager
+
 
 class PropertyInfoActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -94,7 +98,6 @@ class PropertyInfoActivity : AppCompatActivity() {
 
 
 
-
         bookVideoCallButton.setOnClickListener {
             bookingDiv.visibility = LinearLayout.VISIBLE
         }
@@ -122,6 +125,64 @@ class PropertyInfoActivity : AppCompatActivity() {
         }
     }
 
+    private fun initImageParallax(property: PropertyInfoData) {
+        var index = 0
+        var imageList = ArrayList<BitmapDrawable>()
+        for (image in property.images) {
+            val imageBytes = Base64.decode(image, 0)
+            val d_image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            imageList.add(BitmapDrawable(d_image))
+        }
+
+        val imgSwitcher = ImageSwitcher(this)
+
+        imgSwitcher.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+
+        imgSwitcher.setFactory {
+            val imgView = ImageView(applicationContext)
+            //imgView.scaleType = ImageView.ScaleType.FIT_CENTER
+            imgView.scaleType = ImageView.ScaleType.CENTER_CROP
+            imgView.setLayoutParams(
+                FrameLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+            )
+            imgView
+        }
+
+        val c_Layout = findViewById<ConstraintLayout>(R.id.image_constraint_layout)
+        //add ImageSwitcher in constraint layout
+        c_Layout?.addView(imgSwitcher)
+
+        // set the method and pass array as a parameter
+        imgSwitcher.setImageDrawable(imageList[index])
+
+        val imgIn = AnimationUtils.loadAnimation(
+            this, android.R.anim.slide_in_left)
+        imgSwitcher.inAnimation = imgIn
+
+        val imgOut = AnimationUtils.loadAnimation(
+            this, android.R.anim.slide_out_right)
+        imgSwitcher.outAnimation = imgOut
+
+        // previous button functionality
+        val prev = findViewById<Button>(R.id.prev)
+        prev.setOnClickListener {
+            index = if (index - 1 >= 0) index - 1 else 1
+            imgSwitcher.setImageDrawable(imageList[index])
+        }
+        // next button functionality
+        val next = findViewById<Button>(R.id.next)
+        next.setOnClickListener {
+            index = if (index + 1 < imageList.size) index +1 else 0
+            imgSwitcher.setImageDrawable(imageList[index])
+        }
+    }
+
     private fun initViewModel() {
 
         viewModel = ViewModelProvider(this).get(PropertyInfoViewModel::class.java)
@@ -130,11 +191,29 @@ class PropertyInfoActivity : AppCompatActivity() {
 
         viewModel.property.observe(this) {
             if (it == null) {
+
+
                 Toast.makeText(this@PropertyInfoActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
+
                 property(it)
+                initImageParallax(it)
+                println("hre")
             }
         }
+    }
+
+    private fun modelPrice(price: String) : String {
+        var modeledPrice = ""
+        var count = 0
+        for (i in price.length - 1 downTo 0) {
+            modeledPrice += price[i].toString()
+            if (count % 3 == 2) {
+                modeledPrice += " "
+            }
+            count++
+        }
+        return modeledPrice.reversed()
     }
 
     private fun property(property: PropertyInfoData){
@@ -145,21 +224,36 @@ class PropertyInfoActivity : AppCompatActivity() {
         val propertyInfoOwner = findViewById<TextView>(R.id.propertyInfoOwner)
         val propertyInfoImg = findViewById<ImageView>(R.id.propertyInfoImg)
 
-        var urlka = "http://maps.google.com/maps?q=loc:"+property.address
+        val propertyMap = findViewById<ImageView>(R.id.propertyMap)
+
+        val propertyInfoPricePerM = findViewById<TextView>(R.id.propertyInfoPricePerM)
+
+
+        val bookVideoCallButton = findViewById<Button>(R.id.bookVideoCallButton)
+
+        //cant click on the button if owner
+        val user = SharedPrefManager.getInstance(this).user
+        bookVideoCallButton.visibility = Button.VISIBLE
+        if (user.id == property.owner_id) {
+            bookVideoCallButton.visibility = Button.GONE
+        }
+
+        var urlka = "http://maps.google.com/maps?q="+property.address
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(urlka))
 
-        propertyInfoImg.setOnClickListener(View.OnClickListener {
+        propertyMap.setOnClickListener(View.OnClickListener {
             startActivity(intent, null)
         })
 
         val propertyInfoInfo = findViewById<TextView>(R.id.propertyInfoInfo)
 
-        propertyInfoRooms.text = property.rooms.toString()
-        propertyInfoSize.text = property.area.toString()
-        propertyInfoPrice.text = property.price.toString()
+        propertyInfoRooms.text = property.rooms.toString() + "-rooms"
+        propertyInfoSize.text = property.area.toString() + " m2"
+        propertyInfoPrice.text = modelPrice(property.price.toString())
         propertyInfoAddress.text = property.address
         propertyInfoOwner.text = property.owner
         propertyInfoInfo.text = property.info
+        propertyInfoPricePerM.text = modelPrice((property.price.toDouble() / property.area.toDouble()).toInt().toString()) + " € / m2"
 
         val imageBytes = Base64.decode(property.images[0], 0)
         val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)

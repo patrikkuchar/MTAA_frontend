@@ -54,6 +54,13 @@ class ProfileActivity : AppCompatActivity() {
         val editPropertyButton = findViewById<Button>(R.id.editPropertyButton)
         val logoutButton = findViewById<Button>(R.id.logoutButton)
 
+        val profileName = findViewById<TextView>(R.id.profileName)
+        val profileEmail = findViewById<TextView>(R.id.profileEmail)
+
+        val user = SharedPrefManager.getInstance(this).user
+        profileName.text = (user.name + " " + user.surname)
+        profileEmail.text = user.email
+
         bottomNavBooking.setOnClickListener {
             startActivity(Intent(this, BookingActivity::class.java))
         }
@@ -113,7 +120,7 @@ class ProfileActivity : AppCompatActivity() {
 
 
         propertiesListView.setOnItemClickListener(){adapterView, view, position, id ->
-            val itemAtPos = adapterView.getItemAtPosition(position) as BookingSellerData
+            val itemAtPos = adapterView.getItemAtPosition(position) as UserProperty
             val itemIdAtPos = adapterView.getItemIdAtPosition(position)
 
             val propertyId = itemAtPos.id

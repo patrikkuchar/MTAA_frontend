@@ -72,8 +72,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.login_user_response.observe(this, Observer <LoginResponseData?>{
 
             if(it  == null) {
-
-
                 Toast.makeText(this@MainActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
                 val user = User((it.id)!!.toInt(),it.email,it.name,it.surname,it.token)

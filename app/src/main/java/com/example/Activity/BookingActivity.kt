@@ -142,14 +142,11 @@ class BookingActivity : AppCompatActivity() {
 
         viewModel.bookings.observe(this) {
             if (it == null) {
-
-
                 Toast.makeText(this, "Not Found", Toast.LENGTH_LONG).show()
             } else {
                 var View = findViewById<ConstraintLayout>(R.id.booking_root)
                 Bookings = it
                 onAddField(View,it.selling, it.buying)
-                println("hre")
             }
         }
 
@@ -159,15 +156,18 @@ class BookingActivity : AppCompatActivity() {
             }
             else {
                 if(it == 204){
-                    Toast.makeText(this, "Deleted", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Booking Deleted", Toast.LENGTH_LONG).show()
                 }
                 else if (it == 401) {
-                    Toast.makeText(this, "Unauthorized", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Unauthorized Access", Toast.LENGTH_LONG).show()
                     startActivity(Intent(this, MainActivity::class.java))
                 }
                 else if (it ==403) {
                     Toast.makeText(this, "Not your property", Toast.LENGTH_LONG).show()
                     finish()
+                }
+                else {
+                    Toast.makeText(this, "Booking Not Found", Toast.LENGTH_LONG).show()
                 }
 
             }

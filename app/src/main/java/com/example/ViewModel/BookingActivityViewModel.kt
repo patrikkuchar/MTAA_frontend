@@ -23,7 +23,7 @@ class BookingActivityViewModel: ViewModel() {
 
         call.enqueue(object: Callback<BookingData_List> {
             override fun onFailure(call: Call<BookingData_List>, t: Throwable) {
-                println("SDADADSA")
+                bookings.postValue(null)
             }
 
             override fun onResponse(call: Call<BookingData_List>, response: Response<BookingData_List>) {
@@ -51,13 +51,11 @@ class BookingActivityViewModel: ViewModel() {
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful) {
-                    if (response.code().toInt() == 200) {
-                        response_delete.postValue(response.code())
-                    }
+                    response_delete.postValue(response.code())
+
                 } else
                 {
                     response_delete.postValue(response.code())
-                    print("response_not_succesful")
                 }
             }
         })

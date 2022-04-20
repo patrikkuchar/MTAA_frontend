@@ -130,13 +130,9 @@ class PropertyInfoActivity : AppCompatActivity() {
 
         viewModel.property.observe(this) {
             if (it == null) {
-
-
                 Toast.makeText(this@PropertyInfoActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
-
                 property(it)
-                println("hre")
             }
         }
     }

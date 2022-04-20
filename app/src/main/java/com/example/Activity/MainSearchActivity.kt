@@ -453,20 +453,16 @@ class MainSearchActivity : AppCompatActivity() {
 
     private fun initViewModel() {
 
-        println("SS")
         viewModel = ViewModelProvider(this).get(MainSearchActivityViewModel::class.java)
 
 
         viewModel.properties.observe(this) {
             if (it == null) {
-
-
                 Toast.makeText(this@MainSearchActivity, "Bad credentials", Toast.LENGTH_LONG).show()
             } else {
                 var View = findViewById<ConstraintLayout>(R.id.my_root)
                 Properties = it
                 onAddField(View,it.properties)
-                println("hre")
             }
         }
 
@@ -488,7 +484,6 @@ class MainSearchActivity : AppCompatActivity() {
                 Toast.makeText(this@MainSearchActivity, "Error occured", Toast.LENGTH_LONG).show()
             }
             else{
-                println("HERE I AM :D")
                 subregionSpinner(it)
             }
         }
@@ -499,7 +494,6 @@ class MainSearchActivity : AppCompatActivity() {
             }
             else{
                 Properties = it
-                println("TERZA")
                 fetch_properties(it,"0","0")
             }
         }

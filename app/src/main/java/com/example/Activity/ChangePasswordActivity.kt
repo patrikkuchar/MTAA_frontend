@@ -71,7 +71,6 @@ class ChangePasswordActivity : AppCompatActivity() {
             if (it == null) {
                 Toast.makeText(this@ChangePasswordActivity, "Fill out a form", Toast.LENGTH_LONG).show()
             } else {
-                println(it)
                 if (it == 204){
                     Toast.makeText(this@ChangePasswordActivity,"Password successfully changed", Toast.LENGTH_LONG).show()
                     //logout user and go to login page

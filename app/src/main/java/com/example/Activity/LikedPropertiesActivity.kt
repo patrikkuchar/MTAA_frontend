@@ -109,7 +109,7 @@ class LikedPropertiesActivity : AppCompatActivity() {
             } else {
                 var View = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.my_root_liked)
                 onAddField(View,it.properties)
-                println("hre")
+
             }
         }
 
